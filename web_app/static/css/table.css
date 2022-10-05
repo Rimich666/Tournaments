@@ -1,0 +1,89 @@
+.table{
+  margin-top: 15px;
+  background-color: var(--light_70);
+  padding: 1px 10px 10px;
+  border-radius: 15px;
+}
+
+.row {
+  height: 73px;
+  margin-top: 10px;
+  border-radius: 9px;
+  display: grid;
+  gap: 10px;
+  padding: 0;
+}
+
+.row~.row:hover{
+  background-color: var(--light);
+  cursor: pointer;
+}
+
+.cell{
+  margin: 0;
+  border: 1px solid var(--darkly_80);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+ /* align-content: center;*/
+}
+
+.cell-head {
+  background-color: var(--snow);
+}
+
+.cell-head h2{
+  margin: 0 auto;
+  font-family: var(--header-font-family);
+  font-size: 36px;
+  color: var(--deep);
+  font-weight: 600;
+}
+
+.cell-row {
+  background-color: var(--snow_30);
+  padding-left: 1px;
+}
+
+.cell-row p{
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  font-family: var(--p-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--deep-dark);
+  margin: 0;
+}
+
+.cell-row .p_left{
+  margin-left: 10px;
+}
+
+.cell-row .p_center{
+  margin: 0 auto;
+}
+
+.cell-state{
+  display: grid;
+  grid-template-columns: 1fr 38px;
+}
+
+.semaphore{
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 3px;
+  height: 56px;
+  width: 28px;
+}
+
+.semaphore-red{
+  background: transparent url("../img/RedSemaphore.svg") no-repeat center center;
+}
+
+.semaphore-green{
+  background: transparent url("../img/GreenSemaphore.svg") no-repeat center center;
+}
+
+.semaphore-gone{
+  background: transparent url("../img/GoneSemaphore.svg") no-repeat center center;
+}

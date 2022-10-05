@@ -1,0 +1,19 @@
+.page-footer{
+  margin-top: var(--section-margin);
+  width: 960px;
+  height: 204px;
+  background: linear-gradient(80deg,var(--deep-dark) , var(--deep));
+  border-radius: 15px 15px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+}
+
+.footer-head{
+  font-family: var(--header-font-family);
+  font-size: 22px;
+  color: var(--light);
+  font-weight: bold;
+/*  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;*/
+  text-align: center;
+}

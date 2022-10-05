@@ -1,0 +1,19 @@
+.auth_nav_right-grid{
+  grid-template-columns: 1fr 160px 28px;
+  gap: 15px;
+}
+
+.annonym_nav_right-grid{
+  grid-template-columns: 1fr 181px;
+}
+
+.drop_menu_arrow{
+  background-image: url("../img/Arrow.svg");
+  background-repeat: no-repeat;
+  margin-top: 10px;
+}
+
+.drop_menu_arrow:hover{
+  background-image: url("../img/Arrow_deep.svg");
+  background-repeat: no-repeat;
+}

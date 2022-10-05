@@ -1,0 +1,51 @@
+{% extends 'login/login_base.html' %}
+{% block title %}
+    Хронос Log in
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static' ,filename='css/login_style.css') }}">
+{% endblock %}
+
+{% block body %}
+  <main class="main-container">
+    <div class="left-container login-height">
+      <header class="login-header">
+        <img src="{{ url_for('static', filename='img/FramedLogo.svg') }}" alt="Логотип">
+      </header>
+      <form class="form login-form" method="post">
+        {{ form.hidden_tag() }}
+        <div class="fields_2">
+          <figure class="field">
+            <figcaption class="field-caption">
+              Пользователь
+            </figcaption>
+            {{ form.username(size=32, class="field-input", placeholder="Введите имя пользователя", id="user_name") }}
+
+            <!--<input class="field-input" id="user_name" type="text" placeholder="Введите имя пользователя">-->
+            <label class="field-label" for="user_name">
+              Введите имя пользователя<span class="red_star">*</span>
+            </label>
+          </figure>
+          <figure class="field">
+            <figcaption class="field-caption">
+              Пароль
+            </figcaption>
+            <!--<input class="field-input" id="password" type="password" placeholder="Введите пароль">-->
+            {{ form.password(size=32, type="password", placeholder="Введите пароль", class="field-input", id="password") }}
+            <label class="field-label" for="password">
+              Введите пароль<span class="red_star">*</span>
+            </label>
+          </figure>
+        </div>
+        <div class="buttons buttons-login">
+          {{ form.submit(class="button button-yes", value="Войти") }}
+          <!--<input class="button button-yes" type="submit" value="Войти">-->
+          <button class="button button-no" value="отмена">Не входить</button>
+        </div>
+        <a>Не помню пароль</a>
+      </form>
+    </div>
+    <div class="right-container">
+    </div>
+  </main>
+{% endblock %}

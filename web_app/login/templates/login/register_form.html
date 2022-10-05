@@ -1,0 +1,46 @@
+<div class="col-md-4 mx-auto card row align-items-center mt-xl-5">
+    <form class="form-signin" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="input-group mb-3 mt-3">
+                <span class="input-group-text">
+            {{ form.username.label }}</span>
+            {{ form.username(class='form-control', placeholder='Username') }}
+        </div>
+        {{ form.role(class='form-control', id='input_role', hidden=True) }}
+        <div class="input-group mb-3">
+                <span class="input-group-text">
+            {{ form.role.label }}</span>
+            <select class="form-select" id="select_role">
+                {% for choice in form.role.choices %}
+                    <option value="{{ choice[0] }}">{{ choice[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+                <span class="input-group-text">
+            {{ form.phone.label }}</span>
+            {{ form.phone(class='form-control', placeholder='Phone number') }}
+        </div>
+        <div class="input-group mb-3">
+                <span class="input-group-text">
+            {{ form.password.label }}</span>
+            {{ form.password(class='form-control password', placeholder='Пароль') }}
+        </div>
+        <div class="input-group mb-3">
+                  <span class="input-group-text">
+            {{ form.password2.label }}</span>
+            {{ form.password2(class='form-control password', placeholder='Подтвердите пароль') }}
+        </div>
+        {{ form.submit(class='btn btn-primary btn-lg btn-block mb-3') }}
+    </form>
+    <script>
+        $(window).on('load', function (){
+            $('.password').attr('value', '1')
+            console.log('on load')
+        })
+        $('#select_role').on('change', function (){
+            $('#input_role').attr('value', $(this).val())
+            console.log('change')
+        })
+    </script>
+</div>

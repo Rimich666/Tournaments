@@ -1,0 +1,14 @@
+<ul class="sub_nav nav_right auth_nav_right-grid">
+  <li></li>
+  <li>
+    <figure class="user_avatar">
+      <img src="{{ url_for('static', filename='img/Face.svg') }}" alt="Аватар">
+      <figcaption>{{ user.username }}</figcaption>
+    </figure>
+  </li>
+  <li>
+    <a href="{{ url_for('login_app.logout') }}">
+      <div class="menu_item door"></div>
+    </a>
+  </li>
+</ul>

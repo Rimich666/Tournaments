@@ -1,0 +1,19 @@
+.main-header{
+  border-radius: 15px;
+  width: 960px;
+  height: 310px;
+  background: linear-gradient(45deg, var(--darkly_80), var(--deep_74));
+  margin-top: -12px;
+}
+
+.main-header h1{
+  margin-left: 26px;
+  width: 550px;
+  font-family: var(--header-font-family);
+  color: var(--light);
+  font-weight: 600;
+  font-size: 40px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black/*var(--deep-dark)*/;
+  /*border: 1px solid red;*/
+}

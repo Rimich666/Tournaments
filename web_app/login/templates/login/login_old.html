@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    Login
+{% endblock %}
+{% block body %}
+    <div class="col-md-2 mx-auto card row align-items-center mt-xl-5">
+        <form class="form-signin" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.username(size=32, class="form-control mt-3", placeholder="login") }}
+            {{ form.password(size=32, type="password", placeholder="password", class="form-control mt-3") }}
+            <div class="form-check mt-3 mb-3">
+                {{ form.remember_me(class="form-check-input") }}
+                {{ form.remember_me.label(class="form-check-label") }}
+            </div>
+            <div class="form-check mt-3 mb-3">
+                {{ form.send_sms(class="form-check-input") }}
+                {{ form.send_sms.label(class="form-check-label") }}
+            </div>
+            {{ form.submit(class="btn btn-primary btn-block mb-5") }}
+        </form>
+    </div>
+{% endblock %}
+

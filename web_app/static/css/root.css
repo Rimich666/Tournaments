@@ -1,0 +1,30 @@
+:root{
+  --light: #effbff;
+  --light_50: rgba(239,251,255,0.50);
+  --light_70: rgba(239,251,255,0.70);
+  --deep: #0091ea;
+  --deep_74: rgba(0,145,234,0.74);
+  --darkly: #3175b8;
+  --darkly_80:  rgba(49,117,184,0.80);
+  --dark: #01579b;
+  --deep-dark: #0c3759;
+  --deep-dark_20: rgba(12,55,89,0.2);
+  --deep-dark_40: rgba(12,55,89,0.4);
+  --deep-dark_70: rgba(12,55,89,0.7);
+  --black_25: rgba(0,0,0,0.25);
+  --black_40: rgba(0,0,0,0.40);
+  --black_50: rgba(0,0,0,0.50);
+  --snow: #dde2ee;
+  --snow_90: rgba(221,226,238,0.9);
+  --snow_72: rgba(221,226,238,0.72);
+  --snow_60: rgba(221,226,238,0.6);
+  --snow_50: rgba(221,226,238,0.5);
+  --snow_30: rgba(221,226,238,0.3);
+  --link: #ff6e40;
+  --hover: #ff3d00;
+  --button-font-family: Arimo, Tahoma, sans-serif;
+  --header-font-family: Oswald, Impact, sans-serif;
+  --p-font-family: FiraSans, Arial, sans-serif;
+  --section-margin: 15px;
+}
+

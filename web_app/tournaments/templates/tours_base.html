@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/shron.ico') }}">
+    {% block link %}
+    {% endblock %}
+    <style>
+      {% block style %}
+      {% endblock %}
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+    <a href="{{ url_for('tours_app.main') }}">
+      <img class="logo" src="{{ url_for('static', filename='img/LogoInner.svg') }}" alt="Логотип: горнолыжник на песочных часах.">
+    </a>
+    <nav class="navigation">
+      <ul class="sub_nav nav_left nav_left-grid">
+        {% block left_nav %}
+        {% endblock %}
+      </ul>
+      <ul class="sub_nav nav_right nav_right-grid">
+        {% block right_nav %}
+        {% endblock %}
+      </ul>
+    </nav>
+  </header>
+  <main>
+    {% block main %}
+    {% endblock %}
+  </main>
+  <footer class="page-footer">
+    <h4 class="footer-head">Это футер.</h4>
+    <h4 class="footer-head">Контакты.</h4>
+    <h4 class="footer-head">Копирайт.</h4>
+  </footer>
+  </body>
+</html>

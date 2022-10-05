@@ -1,0 +1,70 @@
+{% extends 'login/login_base.html' %}
+{% block title %}
+    Хронос Log in
+{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static' ,filename='css/login_style.css') }}">
+{% endblock %}
+
+{% block body %}
+  <main class="main-container">
+    <div class="left-container register-height">
+      <header class="login-header">
+        <img src="{{ url_for('static', filename='img/FramedLogo.svg') }}" alt="Логотип">
+      </header>
+      <form class="form register-form" method="post">
+        {{ form.hidden_tag() }}
+        <div class="fields_4">
+          <figure class="field">
+            <figcaption class="field-caption">
+              Пользователь
+            </figcaption>
+            <!--<input class="field-input" id="user_name" type="text" placeholder="Введите имя пользователя">-->
+            {{ form.username(class='field-input', placeholder='Введите имя пользователя', id="user_name", type="text") }}
+            <label class="field-label" for="user_name">
+              Введите имя пользователя<span class="red_star">*</span>
+            </label>
+          </figure>
+          <figure class="field">
+            <figcaption class="field-caption">
+              Пароль
+            </figcaption>
+            <!--<input class="field-input" id="password" type="password" placeholder="Введите пароль">-->
+            {{ form.password(class='field-input', placeholder='Введите пароль', id='password', type='password') }}
+            <label class="field-label" for="password">
+              Введите пароль<span class="red_star">*</span>
+            </label>
+          </figure>
+          <figure class="field">
+            <figcaption class="field-caption">
+              Подтвердить пароль
+            </figcaption>
+            <!--<input class="field-input" id="confirm_password" type="password" placeholder="Введите пароль ущё раз">-->
+            {{ form.password2(class='field-input', placeholder='Введите пароль ущё раз', id='confirm_password', type='password') }}
+            <label class="field-label" for="confirm_password">
+              Введите пароль ущё раз<span class="red_star">*</span>
+            </label>
+          </figure>
+          <figure class="field">
+            <figcaption class="field-caption">
+              E-mail
+            </figcaption>
+            <!--<input class="field-input" id="email" type="email" placeholder="Введите E-mail">-->
+            {{ form.email(class='field-input', id='email', type='email', placeholder='Введите E-mail') }}
+            <label class="field-label" for="email">
+              Введите E-mail<span class="red_star">*</span>
+            </label>
+          </figure>
+        </div>
+        <div class="buttons buttons-register">
+          <!--<input class="button button-yes" type="submit" value="Зарегистрироваться">-->
+          {{ form.submit(class='button button-yes', type='submit', value='Зарегистрироваться') }}
+          <button class="button button-no" value="отмена">Назад</button>
+        </div>
+      </form>
+    </div>
+    <div class="right-container">
+    </div>
+
+  </main>
+{% endblock %}

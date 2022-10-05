@@ -1,0 +1,10 @@
+{#% extends 'admin/data.html' %#}
+{% set fields = param['fields'] %}
+{% block details %}
+    <div class="col-4" id="details">
+        <h1>Тут будут детали</h1>
+        {% for field in fields %}
+            <h4>{{ field["header"] }}: {{ field['repr'] }}</h4>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'tours_base.html' %}
+
+{% block title %}
+  Хронос
+{% endblock %}
+{% block link %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+
+{% block left_nav %}
+  <li class="menu_item menu_item_active"><a href="#">Стартовая страница</a></li>
+  <li class="menu_item"><a href="#">Описание системы</a></li>
+{% endblock %}
+{% block right_nav %}
+  {% include 'annonym_right_nav.html' %}
+{% endblock %}
+
+{% block main %}
+  <header class="main-header">
+    <h1> Система электронного хрономертажа тренировок и соревнований по горнолыжному спорту, сноубордингу <br>и не только</h1>
+  </header>
+  <section class="entrance">
+    <h2 class="visually-hidden">Кнопки для входа и регистрации</h2>
+    <ul class="entrance-list">
+      <li>
+        <a href="{{ url_for('tours_app.tours') }}">
+          <figure class="entrance-incognito entrance-item">
+            <figcaption class="entrance-caption">Вход инкогнито</figcaption>
+            <img class="entrance-img" src="{{ url_for('static', filename='img/sova.jpg') }}" alt="">
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('login_app.login') }}">
+          <figure class="entrance-identified entrance-item">
+            <figcaption class="entrance-caption">Вход для своих</figcaption>
+            <img class="entrance-img" src="{{ url_for('static', filename='img/sova.jpg') }}" alt="">
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('login_app.register') }}">
+          <figure class="entrance-registration entrance-item">
+            <figcaption class="entrance-caption">Регистрация</figcaption>
+            <img class="entrance-img" src="{{ url_for('static', filename='img/sova.jpg') }}" alt="">
+          </figure>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <section class="description">
+    <h2 class="section-header">Как это работает</h2>
+    <a class="more_ref" href="">Подробнее</a>
+    <p class="section-text">
+      Каждый спортсмен оснащается электронной картой с уникальным кодом.<br>
+      На трассе устанавливаются комплекты электронного оборудования.
+      Минимально:
+    </p>
+    <ul class="section-text">
+      <li>в стартовые ворота, комплект "Старт", обеспечивающий идентификацию<br>
+        спортсмена по карточке и фиксацию точного времени открытия калитки.</li>
+      <li>в финишные ворота, комплект "Финиш", обеспечивающий идентификацию спортсмена
+        и фиксацию точного времени пересечения финишного инфракрасного створа.</li>
+      </ul>
+    <p class="section-text">
+      При необходимости, для хронометрирования разгонного, финишного или другого отрезка
+      трассы, устанавливается необходимое количество комплектов "Финиш".  Все результаты
+      попыток  сохраняются на сервере, и доступны для просмотра и анализа на этом сайте<br>
+      или в мобильном приложении.
+    </p>
+  </section>
+  <section class="advantages">
+    <h2 class="section-header">Почему это хорошо</h2>
+    <ul class="section-text">
+      <li>Гораздо удобнее ручного хронометража</li>
+      <li>Точность выше самых высоких требований - одна микросекунда (10-6)</li>
+      <li>Никаких проводов.</li>
+      <li>Получаете точную, полную информацию о заездах, попытках в онлайн режиме.</li>
+      <li>Доступен архив тренировок и соревнований.</li>
+      <li>Простота установки и настройки.</li>
+      <li>В комплект входит двести карточек для спортсменов.</li>
+      <li>Лучшее соотношение цена/качество.</li>
+    </ul>
+  </section>
+  <div class="container-2">
+    <section class="product">
+      <h2 class="section-header">Купить</h2>
+      <ul class="section-text">
+        <li>Купите оборудование.</li>
+        <li>Установите.</li>
+        <li>Настройте.</li>
+        <li>Напишите серверный софт.</li>
+        <li>Создайте мобильное приложение.</li>
+        <li>Наслаждайтесь.</li>
+      </ul>
+       <button class="big_blue_button" value="buy">Оставить заявку</button>
+    </section>
+    <section class="product">
+      <h2 class="section-header">Взять в аренду</h2>
+      <ul class="section-text">
+        <li>Возмите оборудование в аренду.</li>
+        <li>Мы уставновим.</li>
+        <li>Мы настроим.</li>
+        <li>Информация попадёт на наш сервер.</li>
+        <li>Просмотр доступен на этом сайте,</li>
+        <li>Или в нашем мобильном приложении.</li>
+        <li>Не напрягайтесь.</li>
+      </ul>
+    <button class="big_blue_button" value="rent">Оставить заявку</button>
+  </section>
+  </div>
+{% endblock %}

@@ -1,0 +1,219 @@
+@import "root.css";
+@import "fonts.css";
+@import "page_header.css";
+@import "main_header.css";
+@import "footer.css";
+@import "hidden.css";
+@import "right_nav.css";
+
+.nav_left-grid{
+  grid-template-columns: 89px 84px 1fr;
+}
+
+.entrance{
+  width: 960px;
+  height: 257px;
+  /*border: 1px solid white;*/
+  border-radius: 15px;
+  background: linear-gradient(160deg,var(--darkly) , var(--snow));
+  display: flex;
+}
+
+.entrance-list{
+  width: 936px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  list-style-type: none;
+  padding: 0;
+  margin: 12px;
+}
+
+.entrance-list li{
+  /*border: 1px solid greenyellow;*/
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.entrance-item{
+  font-family: var(--button-font-family);
+  font-size: 24px;
+
+  color: var(--deep-dark);
+  font-weight: bold;
+
+  border: 2px solid var(--deep-dark);
+  border-radius: 15px;
+  width: 292px;
+  height: 175px;
+  margin: 0;
+  background-color: var(--light_50);
+  display: flex;
+  position: relative;
+}
+
+.entrance-item:hover{
+  width: 302px;
+  height: 189px;
+  font-size: 25px;
+  box-shadow: inset -21px -23px 54px var(--deep-dark_20),
+              inset -26px -23px 55px var(--deep-dark_20),
+              inset -13px -13px 55px var(--deep-dark_20),
+              8px 8px 15px var(--deep-dark_20);
+}
+
+.entrance-caption{
+  margin-left: 25px;
+  margin-top: 25px;
+  z-index: 2;
+  width: 144px;
+  font-size: inherit;
+}
+
+.entrance-img{
+  margin-top: auto;
+  margin-bottom: auto;
+  z-index: 0;
+  width: 140px;
+  height: 155px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: coral;
+  /*background-image: url("img/sova.jpg");*/
+}
+
+.entrance-list a {
+  text-decoration: none;
+}
+
+section{
+  margin-top: var(--section-margin);
+  overflow: hidden;
+}
+
+.section-header{
+  font-family: var(--header-font-family);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--deep);
+  /*border: 1px solid red;*/
+  margin: 18px 0 7px 26px;
+}
+
+.description{
+  width: 960px;
+  /*height: 406px;*/
+  /*border: 1px solid red;*/
+  border-radius: 15px;
+  background: linear-gradient(to top, var(--snow_90), var(--snow_60));
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.description p{
+  width: 906px;
+  margin: 0 30px;
+  line-height: 30px;
+}
+
+.description ul{
+  margin: 0 60px;
+  padding: 0;
+  line-height: 30px;
+}
+
+.more_ref{
+  font-family: var(--button-font-family);
+  position: absolute;
+  top: 45px;
+  right: 26px;
+  text-decoration: none;
+  color: var(--link);
+}
+
+.more_ref:link{
+  font-size: 16px;
+  color: var(--link);
+}
+
+.more_ref:hover{
+  font-weight: bolder;
+  color: var(--hover);
+  text-decoration: underline var(--hover);
+}
+
+.advantages{
+  width: 960px;
+  /*height: 344px;*/
+  border-radius: 15px;
+  background: linear-gradient(to top, var(--snow_90), var(--snow_60));
+  padding-bottom: 18px;
+}
+
+.advantages ul, .product ul{
+  margin: 0 60px;
+  padding: 0;
+  line-height: 30px;
+  list-style-image: url("../img/Marker.svg");
+}
+
+.container-2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.product{
+  /*border: 1px solid greenyellow;*/
+  /*height: 403px;*/
+  padding-bottom: 26px;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, var(--snow), var(--light_50));
+  display: grid;
+  grid-template-rows: 78px 1fr 93px;
+}
+
+.big_blue_button{
+  width: 284px;
+  height: 78px;
+  margin-top: 15px;
+  margin-left: 30px;
+  background-color: var(--dark);
+  border-radius: 10px;
+  border: none;
+  font-family: var(--button-font-family);
+  font-size: 24px;
+  color: #c4c7ce;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: inset -6px -8px 19px var(--black_25),
+              inset -7px -7px 25px var(--black_25),
+              inset -5px -3px 25px var(--black_25),
+              3px 3px 10px var(--deep-dark_40);
+}
+
+.big_blue_button:hover{
+  color: var(--light);
+  background-color: var(--darkly);
+  box-shadow: inset -6px -8px 19px var(--deep-dark_40),
+              inset -7px -7px 25px var(--deep-dark_40),
+              inset -5px -3px 25px var(--deep-dark_40),
+              3px 3px 10px var(--deep-dark_40);
+}
+
+.section-text{
+  font-family: var(--p-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--deep-dark);
+}
+
+body{
+  background: #ffffff url("../img/bg-start-page.jpg") no-repeat center center;
+  width: 960px;
+  margin: 0 auto;
+}

@@ -1,0 +1,78 @@
+{% extends 'admin/admin_base.html' %}
+{% set cur_table = param['cur_table'] %}
+{% set cur_navtab = param['cur_navtab'] %}
+{% set navtabs = param['navtabs'] %}
+{% set tables = param['tables'] %}
+{% block title %}
+  Tables list
+{% endblock %}
+
+{% block content %}
+  <div>
+    {% if not param['tables'] %}
+        No tables yet
+    {% else %}
+     <div class="row">
+        <div class="col-2">
+            <h3>Tables:</h3>
+        </div>
+        <div class="col-10">
+            <ul class="nav nav-tabs">
+
+                {% for navtab in navtabs %}
+                    <li class="nav-item">
+                        {% if navtab == cur_navtab %}
+                            <a class="nav-link active" href="{{ url_for('admin_app.table', table=cur_table, navtab=navtab) }}">
+                                {{ navtab }}
+                            </a>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('admin_app.table', table=cur_table, navtab=navtab) }}">
+                                {{ navtab }}
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-2">
+            <div class="list-group" id="list-tab" role="tablist">
+                {% for table in tables.keys() %}
+                    {% if table == cur_table %}
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" id="active_list_item"
+                        href="{{ url_for('admin_app.table', table=table, navtab=cur_navtab ) }}" role="tab" aria-controls="home">
+                            {{ table }} ({{ tables[table].alt_name }})
+                        </a>
+                    {% else %}
+                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                        href="{{ url_for('admin_app.table', table=table, navtab=cur_navtab) }}" role="tab">
+                            {{ table }} ({{ tables[table].alt_name }})
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="tab-content">
+<!--                <div class="tab-pane fade show active" role="tabpanel" >-->
+                {% block table %}
+                {% endblock %}
+<!--                </div>-->
+<!--                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>-->
+            </div>
+        </div>
+     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+        });
+    </script>
+    {% endif %}
+
+  </div>
+{% endblock %}
+{% block scripts %}
+{% endblock %}

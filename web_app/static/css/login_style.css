@@ -1,0 +1,291 @@
+@import "root.css";
+@import "fonts.css";
+@import "buttons.css";
+
+html,body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+@media (min-aspect-ratio: 16/9 ) {
+  body {
+    background: #ffffff url("img/LoginBack.jpg") no-repeat;
+    background-size: 100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  body {
+    background: #ffffff url("img/LoginBack.jpg") no-repeat;
+    background-size: auto 100%;
+  }
+}
+
+.login-header{
+  position: absolute;
+  top: 10px;
+  left: 13%;
+  height: 97px;
+  width: 88px;
+  margin-top: 0;
+  border-radius: 0 0 0 15px;
+  background-color: var(--deep-dark_40);
+}
+
+.form{
+/*
+  min-height: 385px;
+  height: calc(max(42vw / 537, 1px) * 385);*/
+  min-width: 537px;
+  width: 42vw;
+  border: 2px solid var(--deep-dark);
+  border-radius: 16px;
+  margin-left: 13%;
+  background-color: var(--darkly_80);
+  display: grid;
+  justify-content: center;
+}
+
+.main-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.left-container{
+  background-color: rgba(50,50,50,0);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: relative;
+}
+
+.field{
+  margin: 0;
+  padding: max(2.03vw, 26px) 0 0;
+  display: grid;
+  grid-template-rows: 40% 60%;
+  width: max(32.1vw, 411px);
+  height: max(6.48vw, 83px);
+  position: relative;
+}
+
+.fields_1{
+  display: grid;
+  grid-auto-rows: 1fr;
+  justify-content: center;
+}
+
+.fields_2{
+  display: grid;
+  grid-auto-rows: 1fr 1fr;
+  justify-content: center;
+}
+
+.fields_4{
+  display: grid;
+  grid-auto-rows: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+}
+
+.field-input{
+  background-color: var(--light);
+  border-radius: 4px;
+  border: 0;
+  outline: none;
+  font-family: var(--p-font-family);
+  font-size: max(1.875vw, 24px);
+  color: var(--deep-dark);
+}
+
+.field-input::placeholder{
+  color: transparent;
+}
+
+.field-label{
+  position: absolute;
+  top: max(75px, 5.859vw);
+  left: max(10px, 0.7825vw);
+  font-family: var(--button-font-family);
+  font-weight: normal;
+  font-size: max(1.25vw, 16px);
+  color: var(--snow);
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+
+.field-input:focus, .field-input:not(:placeholder-shown){
+  padding-top: max(.9375vw,12px);
+  padding-left: max(10px, 0.7825vw);
+}
+
+.field-input:focus~.field-label, .field-input:not(:placeholder-shown)~.field-label {
+  color: var(--darkly);
+  /*opacity: .65;*/
+  transform: scale(.60) translateY(min(-1.875vw, -24px)) translateX(min(-10px, -0.7825vw));
+}
+
+.field-caption{
+  font-family: var(--button-font-family);
+  color: var(--light);
+  -webkit-text-stroke-width: 0.07vw;
+  -webkit-text-stroke-color: var(--deep-dark);
+  font-size: max(1.875vw, 24px);
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.red_star{
+  margin-left: 5px;
+  color: #ff3d00;
+}
+
+a{
+  font-family: var(--button-font-family);
+  color: var(--link);
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+a:link{
+  font-size: 16px;
+  color: var(--link);
+}
+
+a:hover{
+  font-weight: 600;
+  color: var(--hover);
+  text-decoration: underline var(--hover);
+}
+
+.buttons{
+  width: max(32.1vw, 411px);
+  height: max(4.0625vw, 52px);
+  padding: max(2.03vw, 26px) 0;
+  display: grid;
+  margin: 0;
+}
+/*
+.button{
+  background-color: var(--dark);
+  border-radius: 10px;
+  border: none;
+  font-family: var(--button-font-family);
+  font-size: max(1.875vw, 24px);
+  color: #85868a;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: inset -6px -8px 19px var(--black_25),
+              inset -7px -7px 25px var(--black_25),
+              inset -5px -3px 25px var(--black_25),
+              3px 3px 10px var(--deep-dark_40);
+}
+
+.button-yes{
+  background-color: #5c7729;
+}
+
+.button-yes:hover{
+  background-color: #a7f017;
+
+}
+
+.button-no{
+  background-color: #723b3d;
+}
+
+.button-no:hover{
+  background-color: #c7575a;
+}
+
+.button:hover{
+  color: var(--light);
+}
+*/
+::placeholder{
+  color: #91919c;
+}
+
+.buttons-login{
+  grid-template-columns: 1fr 1fr;
+  gap: max(1.125vw, 16px);
+}
+
+.buttons-register{
+  grid-template-columns: 3fr 1fr;
+  gap: max(1.125vw, 16px);
+}
+
+.login-form{
+  min-width: 537px;
+  min-height: 385px;
+  width: 42vw;
+  height: calc(max(42vw / 537, 1px) * 385);
+  grid-template-rows: calc(2 * (max(6.48vw, 83px) + max(2.03vw, 26px)))
+                      calc(max(4.0625vw, 52px) + 2 * max(2.03vw, 26px));
+}
+
+.login-height{
+  min-height: calc(max(42vw / 537, 1px) * 385 + 2 * 118px);
+}
+
+.register-height{
+  min-height: calc(max(42vw / 537, 1px) * 540 + 2 * 118px);
+}
+
+.confirm_form{
+  min-height: 385px;
+  height: calc(max(42vw / 537, 1px) * 385);
+  grid-template-rows: calc(max(6.09375vw, 78px) + max(2.03vw, 26px))
+                      calc(max(6.48vw, 83px) + max(2.03vw, 26px))
+                      calc(max(4.0625vw, 52px) + max(2.03vw, 26px))
+                      calc(max(3.28125vw, 42px) + 2 * max(2.03vw, 26px));
+}
+
+.register_form{
+  min-height: 540px;
+  height: calc(max(42vw / 537, 1px) * 540);
+  grid-template-rows: calc(4 * (max(6.48vw, 83px) + max(2.03vw, 26px)))
+                      calc(max(4.0625vw, 52px) + max(2.03vw, 26px));
+}
+
+.confirm_form-header{
+  padding-top: max(2.03vw, 26px);
+}
+
+.confirm_form-footer{
+  display: flex;
+  align-items: center;
+}
+
+.caption{
+  font-family: var(--button-font-family);
+  color: var(--light);
+  font-weight: normal;
+  margin: 0;
+}
+
+.caption-3{
+  padding: 0;
+  font-size: max(1.875vw, 24px);
+  line-height: max(1.875vw, 24px);
+}
+
+.caption-4{
+  font-size: max(1.125vw, 16px);
+  line-height: max(1.875vw, 24px);
+}
+
+.subheader{
+  margin-top: max(10px, 0.7825vw);
+}
+
+.register-height{
+  min-height: calc(max(42vw / 537, 1px) * 540 + 2 * 118px);
+}

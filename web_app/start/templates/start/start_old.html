@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+    Start {{ user }}
+{% endblock %}
+{% block body %}
+    <header class="page-header">
+        <a class="logo">
+            <img src="{{ url_for('static', filename='src/logoza.png') }}" alt="Логотип" width="160" height="160">
+        </a>
+        <h1 class="header-title">Приложение технического обеспечения соревнований</h1>
+    </header>
+    <main class="page-main">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="{{ url_for('login_app.logout') }}" class="nav-link active" title="Выход" type="button">Выход</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <h1>Стартовая страница</h1>
+
+            <h2>вошёл юзер: {{ user }}</h2>
+        </div>
+    </main>
+    <footer class="page-footer">
+        <span class="copyright">© 2022 Не все права защищены(не только лишь все)</span>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'admin/admin_index.html' %}
+{% set data = param['data'] %}
+{% set fields = param['fields'] %}
+{% block table %}
+    {% if data %}
+        {% set btn_del_class = "btn btn-danger btn-sm" %}
+    {% else %}
+        {% set btn_del_class = "btn btn-danger btn-sm disabled" %}
+    {% endif %}
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group me-2" role="group">
+            <a href="{{ url_for('admin_app.add', table=param['cur_table']) }}" type="button" class="btn btn-success btn-sm">
+                Добавить
+            </a>
+        </div>
+        <div class="btn-group me-2" role="group">
+            <a href="#" type="button" class="{{ btn_del_class }}"
+               id="delete_record"
+               data-url="{{ url_for('admin_app.delete', table=param['cur_table'], key_fields='{transfer_string}') }}">
+                Удалить
+            </a>
+        </div>
+    </div>
+    <div class="row" id="table_container">
+        <div class="col-8">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="list"
+                       data-url_details="{{ url_for('admin_app.details', table=param['cur_table'],
+                                                                         key_fields='{transfer_string}') }}">
+                    <thead>
+                        <tr id="0">
+                            {% for field in fields %}
+                                <th id="{{ field['name'] }}" scope="col">{{ field['name'] }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set cr = 0 %}
+                        {% for row in data %}
+                            <tr id="{{ loop.index }}" data-pk="{{ param['exist_pk'] }}">
+                                {% for field in fields %}
+                                    {% if field['pk'] %}
+                                        {% set dpk = 1 %}
+                                    {% else %}
+                                        {% set dpk = 0 %}
+                                    {% endif %}
+                                    <td headers="{{ field['name'] }}" data-pk="{{ dpk }}"> {{ row[field['name']] }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+        {% block details %}
+        {% endblock %}
+    </div>
+    <script>
+        function createFragmentFromString(str){
+            let template = document.createElement("template");
+            template.innerHTML = str;
+            return template.content;
+        }
+        function get_details(transfer){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', transfer, true);
+            xhr.responseType = 'text';
+            xhr.onload = function () {
+                if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200) {
+                        let str = xhr.responseText;
+                        //console.log(str);
+                        let fragment = createFragmentFromString(str);
+                        if ($("div").is("div#details"))
+                            {
+                                $("div#details").replaceWith(fragment);
+                            }
+                        else
+                            {
+                                $("div#table_container").append(fragment);
+                            }
+                        //console.log(fragment);
+                    }
+                }
+            };
+
+            xhr.send(null);
+        }
+
+        $(document).ready(function(){
+            let url_det = $("table#list").attr("data-url_details")
+
+            let btn_del = $("a#delete_record")
+            let url_del = btn_del.attr("data-url")
+
+            let current_row = 0;
+            let ar = $("tr" + String(current_row));
+
+            $("tr").click(function(){
+                if($(this).attr('id') > 0){
+                    let ali = $("#active_list_item");
+                    $(this).css("background-color", ali.css('background-color'));
+                    $(this).css("color", ali.css('color'));
+                    current_row = $(this).attr("id")
+                    ar.css("background-color", "");
+                    ar.css("color", "");
+                    ar = $(this);
+                    console.log(btn_del.attr("href"))
+                    btn_del.attr("href", get_transfer_str(url_del))
+                    console.log(btn_del.attr("href"))
+                    get_details(get_transfer_str(url_det));
+
+                }
+            });
+
+
+            function get_transfer_str(url){
+                let exist_pk = ar.attr("data-pk");
+                    let transfer = "";
+                    let trans_ob = {};
+                    ar.find('td').each(function () {
+                        if (exist_pk === "True"){
+                            if ($(this).attr("data-pk") === 1) {
+                                trans_ob[$(this).attr("headers")] = $(this).text().trim()
+                            }
+                        }
+                        else{
+                            trans_ob[$(this).attr("headers")] = $(this).text().trim()
+                        }
+                    });
+                    transfer = JSON.stringify(trans_ob);
+                    return url.replace('transfer_string',transfer);
+            }
+        });
+    </script>
+
+{% endblock %}
+{% block scripts %}
+
+
+{% endblock %}

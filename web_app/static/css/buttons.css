@@ -1,0 +1,35 @@
+.button{
+  background-color: var(--dark);
+  border-radius: 10px;
+  border: none;
+  font-family: var(--button-font-family);
+  font-size: max(1.875vw, 24px);
+  color: #85868a;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: inset -6px -8px 19px var(--black_25),
+              inset -7px -7px 25px var(--black_25),
+              inset -5px -3px 25px var(--black_25),
+              3px 3px 10px var(--deep-dark_40);
+}
+
+.button-yes{
+  background-color: #5c7729;
+}
+
+.button-yes:hover{
+  background-color: #a7f017;
+
+}
+
+.button-no{
+  background-color: #723b3d;
+}
+
+.button-no:hover{
+  background-color: #c7575a;
+}
+
+.button:hover{
+  color: var(--light);
+}

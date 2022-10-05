@@ -1,0 +1,50 @@
+{% extends 'tours_base.html' %}
+
+{% block title %}
+  Список турниров
+{% endblock %}
+{% block link %}
+  <link rel="stylesheet" href="{{ url_for('static', filename="css/tourn_style.css") }}">
+{% endblock %}
+
+{% block left_nav %}
+  <li class="menu_item menu_item_active"><a href="#">Соревнования</a></li>
+  <li class="menu_item"><a href="#">Места проведения</a></li>
+  <li class="menu_item"><a href="#">Справочники</a></li>
+{% endblock %}
+
+{% block right_nav %}
+  {% if auth %}
+    {% include 'auth_right_nav.html' %}
+  {% else %}
+    {% include 'annonym_right_nav.html' %}
+  {% endif %}
+{% endblock %}
+{% block main %}
+  <header class="main-header">
+    <h1>Соревнования</h1>
+    <button class="button button-yes">+
+    </button>
+  </header>
+  <section class="table">
+    <h2 class="visually-hidden">Список турниров</h2>
+    <div class="row row-grid">
+      <div class="cell cell-head"><h2>Название турнира</h2></div>
+      <div class="cell cell-head"><h2>Место проведения</h2></div>
+      <div class="cell cell-head"><h2>Время</h2></div>
+      <div class="cell cell-head"><h2>Статус</h2></div>
+    </div>
+    {% for row in rows %}
+      <div class="row row-grid">
+        <div class="cell cell-row"><p class="p_left">{{ row.tournament }}</p></div>
+        <div class="cell cell-row"><p class="p_left">{{ row.place }}</p></div>
+        <div class="cell cell-row"><p class="p_center">{{ row.start }}<br>{{ row.finish }}</p></div>
+        <div class="cell cell-row cell-state">
+          <p class="p_left">Подгото<br>вка</p>
+          <button class="semaphore semaphore-red"></button>
+        </div>
+      </div>
+    {% endfor %}
+
+  </section>
+{% endblock %}

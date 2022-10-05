@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Arimo";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Arimo/Arimo-Regular.woff2") format("woff2"),
+       url("../fonts/Arimo/Arimo-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arimo";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Arimo/Arimo-Bold.woff2") format("woff2"),
+       url("../fonts/Arimo/Arimo-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arimo";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/Arimo/Arimo-SemiBold.woff2") format("woff2"),
+       url("../fonts/Arimo/Arimo-SemiBold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Oswald/Oswald-Regular.woff2") format("woff2"),
+       url("../fonts/Oswald/Oswald-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Oswald/Oswald-Bold.woff2") format("woff2"),
+       url("../fonts/Oswald/Oswald-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/Oswald/Oswald-SemiBold.woff2") format("woff2"),
+       url("../fonts/Oswald/Oswald-SemiBold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/FiraSans/FiraSans-Regular.woff2") format("woff2"),
+       url("../fonts/FiraSans/FiraSans-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/FiraSans/FiraSans-Bold.woff2") format("woff2"),
+       url("../fonts/FiraSans/FiraSans-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "FiraSans";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/FiraSans/FiraSans-SemiBold.woff2") format("woff2"),
+       url("../fonts/FiraSans/FiraSans-SemiBold.woff") format("woff");
+  font-display: swap;
+}

@@ -1,0 +1,141 @@
+//Соревнования в общем(турнир)
+table tournament{
+  id bigserial [pk]
+  name varcharacter(100)
+  start date
+  finish date
+  id_geo bigserial
+}
+
+//География проведения(Гора)
+table geography{
+  id bigserial [pk]
+  name varcharacter(100)
+  //Какито свойства,атрибуты...
+}
+
+//Соревнование вчастности
+table competition{
+  id bigserial [pk]
+  id_tour bigserial
+  id_speciality bigserial
+  id_category bigserial
+  start timestamp
+  //Ниже имеется в виду id железа
+  //Если не прав поправте
+  start_gate serial
+  finish_gate serial
+}
+
+//Вид спорта
+table sport_type{
+  id bigserial [pk]
+  name varcharacter(100)
+}
+
+//Дисциплина(Спуск,слалом...)
+table speciality{
+  id bigserial [pk]
+  name varcharacter(100)
+  id_sport_type bigserial
+}
+
+//Категория возрастная, гендерная, ещё какая
+table category{
+  id bigserial [pk]
+  name varcharacter(100)
+}
+
+//Ворота промежуточные
+table gates{
+  id bigserial
+  hard_id serial
+  number smallserial
+  id_comp bigserial
+}
+
+//Попытка
+table attempt{
+  id bigserial
+  id_comp bigserial
+  number smallserial
+}
+
+table teams{
+  id bigserial [pk]
+  name varcharacter(100)
+  id_tour bigserial
+}
+
+table sportsman{
+  id bigserial
+  id_pers bigserial
+}
+
+table cards{
+  id bigserial
+  number smallserial
+  hard_id serial
+}
+
+table starting_protocol{
+  id_attempt bigserial
+  //id_entrant bigserial
+  id_sports bigserial
+  id_card bigserial
+  start_number smallserial
+}
+
+table referees{
+  id bigserial
+  id_pers bigserial
+}
+
+table members{
+  id_sports bigserial
+  id_team bigserial
+}
+
+table tour_referees{
+  id_reff bigserial
+  id_tour bigserial
+}
+
+table att_referees{
+  id_attempt bigserial
+  id_reff bigserial
+}
+
+table persons{
+  id bigserial
+  surname varcharacter(30)
+  name varcharacter(30)
+  patrionimic varcharacter(30)
+  birth_day date
+  gender varchar(4)
+}
+
+table referees_notes{
+  id bigserial
+}
+
+
+Ref: tournament.id_geo > geography.id
+Ref: speciality.id_sport_type > sport_type.id
+Ref: competition.id_tour > tournament.id
+Ref: competition.id_speciality > speciality.id
+Ref: competition.id_category > category.id
+Ref: gates.id_comp > competition.id
+Ref: attempt.id_comp > competition.id
+Ref: members.id_sports > sportsman.id
+Ref: members.id_team > teams.id
+Ref: starting_protocol.id_attempt > attempt.id
+Ref: starting_protocol.id_sports > sportsman.id
+Ref: starting_protocol.id_card > cards.id
+Ref: teams.id_tour > tournament.id
+Ref: tour_referees.id_tour > tournament.id
+Ref: tour_referees.id_reff > referees.id
+Ref: att_referees.id_attempt > attempt.id
+Ref: att_referees.id_reff > referees.id
+Ref: sportsman.id_pers > persons.id
+Ref: referees.id_pers > persons.id

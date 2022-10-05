@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    Confirm code
+{% endblock %}
+{% block body %}
+    <div class="col-md-3 mx-auto card row align-items-center mt-xl-5">
+        <div class="card-header">
+            Это заглушка для двухфакторной авторизации
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Код подтверждения: {{ code }}</h5>
+            <form class="form-signin" action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                {{ form.code(class="form-control mt-3", placeholder="Код подтверждения", id='input_code') }}
+                {{ form.submit(class="btn btn-primary btn-block mt-3", id='btn-confirm_submit') }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@3/dist/socket.io.js"></script>
+    <script>
+        $(document).ready(function(){
+            let socket = io();
+            socket.on('my response', function(msg){
+                console.log(msg.data);
+            })
+            socket.on('remained', function (msg){
+                $('#btn-confirm_submit').attr('value', 'Подтвердить (' + msg.data + ')');
+            })
+            socket.on('time up', function (msg){
+                console.log(msg.data);
+//                $('#input_code').attr('value', 0);
+                $('#btn-confirm_submit').click();
+
+            })
+        })
+    </script>
+{% endblock %}
