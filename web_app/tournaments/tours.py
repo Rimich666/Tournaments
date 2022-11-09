@@ -27,9 +27,15 @@ def tours():
                      'tournament': row.tournament.strip(),
                      'start': row.start.strftime("%d.%m.%Y"),
                      'finish': row.finish.strftime("%d.%m.%Y"),
-                     'place': row.place.place.strip()
+                     'place': row.place.place.strip(),
+                     'state': row.state
                      })
         count += count
         print(row.place.place.strip())
     return render_template('tournaments.html', user=current_user, auth=current_user.is_authenticated,
                            rows=rows, count=count)
+
+
+@tours_app.route('/add', endpoint="add")
+def add_tour():
+    return render_template('tours_add.html')

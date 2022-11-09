@@ -27,6 +27,7 @@ class Tournament(db.Model, Templ):
     tournament = Column(String(100), unique=True, nullable=False)
     start = Column(Date, nullable=False)
     finish = Column(Date, nullable=False)
+    state = Column(Integer)
     place_id = Column(Integer, ForeignKey(Place.id))
     place = relationship(Place)
     competitions = relationship('Competition')

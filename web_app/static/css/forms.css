@@ -1,0 +1,13 @@
+.form{
+/*
+  min-height: 385px;
+  height: calc(max(42vw / 537, 1px) * 385);*/
+  min-width: 537px;
+  width: 42vw;
+  border: 2px solid var(--deep-dark);
+  border-radius: 16px;
+  margin-left: 13%;
+  background-color: var(--darkly_80);
+  display: grid;
+  justify-content: center;
+}

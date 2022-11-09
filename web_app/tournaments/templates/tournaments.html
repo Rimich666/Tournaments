@@ -23,8 +23,8 @@
 {% block main %}
   <header class="main-header">
     <h1>Соревнования</h1>
-    <button class="button button-yes">+
-    </button>
+    <a class="button button-yes a_button" href="{{ url_for('tours_app.add') }}">+
+    </a>
   </header>
   <section class="table">
     <h2 class="visually-hidden">Список турниров</h2>
@@ -47,4 +47,7 @@
     {% endfor %}
 
   </section>
+{% endblock %}
+{% block modals %}
+  {% include 'tours_add.html' %}
 {% endblock %}
