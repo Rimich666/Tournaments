@@ -6,6 +6,7 @@
 @import "hidden.css";
 @import "right_nav.css";
 
+
 .nav_left-grid{
   grid-template-columns: 89px 84px 1fr;
 }

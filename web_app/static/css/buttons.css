@@ -13,6 +13,14 @@
               3px 3px 10px var(--deep-dark_40);
 }
 
+button:active{
+  box-shadow: inset -6px -8px 19px var(--black_25),
+              inset -7px -7px 25px var(--black_25),
+              inset -5px -3px 25px var(--black_25),
+              inset 0 0 3px 1px rgba(0,0,0,.8),
+              3px 3px 10px var(--deep-dark_40);
+}
+
 .button-yes{
   background-color: #5c7729;
 }

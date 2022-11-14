@@ -17,7 +17,6 @@ class Place(db.Model, Templ):
     __table_args__ = {'info': {'alt_name': 'Места проведения'}}
     id = Column(Integer, primary_key=True)
     place = Column(String, unique=True, nullable=False)
-    tournaments = relationship('Tournament')
 
 
 class Tournament(db.Model, Templ):

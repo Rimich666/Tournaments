@@ -33,9 +33,10 @@ body{
   vertical-align: center;
 }
 
-.button-yes{
+.button-add{
   height: 52px;
   width: 52px;
+  font-size: 44px;
 }
 
 .row-grid{

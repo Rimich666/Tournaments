@@ -1,15 +1,15 @@
 {% extends 'tours_base.html' %}
 
 {% block title %}
-  Список турниров
+  Список мест проведения
 {% endblock %}
 {% block link %}
   <link rel="stylesheet" href="{{ url_for('static', filename="css/tourn_style.css") }}">
 {% endblock %}
 
 {% block left_nav %}
-  <li class="menu_item menu_item_active"><a href="#">Соревнования</a></li>
-  <li class="menu_item"><a href="#">Места проведения</a></li>
+  <li class="menu_item"><a href="{{ url_for("tours_app.main") }}">Соревнования</a></li>
+  <li class="menu_item menu_item_active"><a href="#">Места проведения</a></li>
   <li class="menu_item"><a href="#">Справочники</a></li>
 {% endblock %}
 
@@ -22,12 +22,12 @@
 {% endblock %}
 {% block main %}
   <header class="main-header">
-    <h1>Соревнования</h1>
+    <h1>Места проведения</h1>
     <button class="button button-yes button-add" id="add_tour_button">+
     </button>
   </header>
   <section class="table">
-    <h2 class="visually-hidden">Список турниров</h2>
+    <h2 class="visually-hidden">Список мест проведения турниров</h2>
     <div class="row row-grid">
       <div class="cell cell-head"><h2>Название турнира</h2></div>
       <div class="cell cell-head"><h2>Место проведения</h2></div>

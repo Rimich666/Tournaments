@@ -73,6 +73,7 @@ def secunda():
 
 @login_app.route('/', methods=['GET', 'POST'], endpoint='login')
 def login():
+    #print(f'current user: {current_user}')
     if current_user.is_authenticated:
         if current_user.role.role == 'admin':
             return redirect(url_for('admin_app.index'))

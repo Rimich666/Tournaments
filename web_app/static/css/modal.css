@@ -1,3 +1,4 @@
+@import "forms.css";
 .modal-container {
   position: fixed;
   top: 0;
@@ -5,9 +6,182 @@
   display: flex;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--snow_80);
 }
 
-.modal-add_tour {
-
+.modal-container-close {
+  display: none;
 }
+
+.modal {
+  padding-top: 15px;
+  width: 537px;
+  height: 482px;
+  border: 2px solid var(--deep-dark);
+  border-radius: 16px;
+  background-color: var(--darkly_80);
+  display: grid;
+  grid-template-rows: 52px calc(3 * (83px + 26px)) calc(52px + 26px);
+  justify-content: center;
+  position: relative;
+  margin: auto;
+}
+
+.modal-close-button {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  width: 52px;
+  height: 52px;
+  background-image: url("../img/Cross.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.modal-title {
+  margin: 0;
+  font-family: var(--header-font-family);
+  font-size: 36px;
+  color: var(--light);
+  font-weight: 600;
+}
+
+.modal-field{
+  padding: 26px 0 0;
+  width: 411px;
+  height: 83px;
+}
+
+.modal_field_12{
+  width: 200px;
+}
+
+.modal_field-caption{
+  font-size: 24px;
+  -webkit-text-stroke-width: 1px;
+}
+
+.modal_field-input{
+  font-size: 24px;
+}
+
+.columns_2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+  justify-content: center;
+}
+
+.modal_button{
+  font-size: 24px;
+}
+
+.buttons-add_tournament{
+  width: 411px;
+  height: 52px;
+  padding: 26px 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+}
+
+
+.modal_field-label{
+  top: 75px;
+  left: 10px;
+  font-size: 16px;
+}
+
+.modal_field-input:focus, .modal_field-input:not(:placeholder-shown){
+  padding-top: 12px;
+  padding-left: 10px;
+}
+
+.modal_field-input:focus~.modal_field-label, .modal_field-input:not(:placeholder-shown)~.modal_field-label {
+  color: var(--darkly);
+  transform: scale(.60) translateY(-24px) translateX(-10px);
+}
+
+.modal_input-button{
+  position: absolute;
+  top: 62px;
+  right: 3px;
+  width: 44px;
+  height: 44px;
+  font-size: 36px;
+  background-color: var(--light);
+}
+
+.modal_input-button:hover{
+  background-color: white;
+}
+
+.popup-select_places{
+  position: absolute;
+  top: 287px;
+  left: 62px;
+  border: 1px solid var(--deep-dark);
+  border-radius: 4px;
+  background-color: var(--snow);
+  display: grid;
+  justify-content: center;
+  width: 411px;
+  padding-bottom: 2px;
+  gap: 2px;
+}
+
+.popup-close{
+  display: none;
+}
+
+.row-select_places {
+  width: 407px;
+  font-family: var(--p-font-family);
+  background-color: var(--light);
+  border-radius: 4px;
+  color: var(--deep-dark);
+  display: flex;
+  padding: 0;
+  cursor: pointer;
+}
+
+.row-select_places:hover{
+  background-color: white;
+}
+
+.popup-select_places a{
+  font-style: italic;
+  color: var(--link);
+}
+
+.popup-select_places a:hover{
+  color: var(--hover);
+  text-decoration: underline;
+}
+
+/*.popup_row-button{
+  width: 44px;
+  height: 44px;
+  font-size: 36px;
+}
+
+.popup_close-button{
+  background-image: url("../img/Cross.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}*/
+
+/*
+.popup_select_places-header{
+  grid-template-columns: calc(411px - (4 * 3px) - 88px) 44px 44px;
+}
+
+.popup_header{
+  font-size: 24px;
+  line-height: 50px;
+  margin-left: 24px;
+  -webkit-text-stroke-width: 1px;
+  vertical-align: bottom;
+}*/

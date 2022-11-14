@@ -1,36 +1,58 @@
-<div class="modal-container">
-  <div class="modal modal-add_tour">
+<div class="modal-container modal-container-close">
+  <form class="modal" id="tour_add_form">
+    <button class="button button-no modal-close-button">
+      <span class="visually-hidden">Закрыть</span>
+    </button>
+    <header class="modal-header">
+      <h2 class="modal-title">Создание нового турнира</h2>
+    </header>
+    <div class="rows_3">
+      <figure class="field modal-field">
+        <figcaption class="field-caption modal_field-caption">
+          Наименование
+        </figcaption>
+        <input class="field-input modal_field-input" placeholder="Введите наименование" id="tour_name">
+        <label class="field-label modal_field-label" for="tour_name">
+          Введите наименование<span class="red_star">*</span>
+        </label>
+      </figure>
+      <figure class="field modal-field">
+        <figcaption class="field-caption modal_field-caption">
+          Место проведения
+        </figcaption>
+        <input class="field-input modal_field-input" placeholder="Выберете место проведения" id="tour_place">
+        <button class="button modal_input-button" id="tour_place_select">...</button>
+        <label class="field-label modal_field-label" for="tour_place">
+          Выберете место проведения<span class="red_star">*</span>
+        </label>
+      </figure>
+      <div class="columns_2">
+        <figure class="field modal-field modal_field_12">
+          <figcaption class="field-caption modal_field-caption">
+            Дата начала
+          </figcaption>
+          <input class="field-input modal_field-input" type="date" placeholder="Дата начала" id="tour_start">
+          <label class="field-label modal_field-label" for="tour_start">
+            Дата начала<span class="red_star">*</span>
+          </label>
+        </figure>
+        <figure class="field modal-field modal_field_12">
+          <figcaption class="field-caption modal_field-caption">
+            Дата окончания
+          </figcaption>
+          <input class="field-input modal_field-input" type="date" placeholder="Дата окончания" id="tour_finish">
+          <label class="field-label modal_field-label" for="tour_finish">
+            Дата окончания <span class="red_star">*</span>
+          </label>
+        </figure>
+      </div>
+    </div>
+    <div class="buttons-add_tournament">
+      <input type="submit" class="button button-yes modal_button" value="Создать" id="add_tour_submit">
+      <button class="button button-no modal_button" value="Отмена">Отмена</button>
+    </div>
+    <article class="popup-select_places popup-close" id="places_list">
 
-  </div>
+    </article>
+  </form>
 </div>
-
-  {#<form>
-    <fieldset>
-      <label for="name">Наименование</label>
-      <input id="name" type="text">
-    </fieldset>
-    <fieldset>
-      <label for="place">Место проведения</label>
-      <input id="place">
-      <button>...</button>
-    </fieldset>
-    <fieldset>
-      <label for="date_start">Дата начала</label>
-      <input id="date_start" type="date">
-    </fieldset>
-    <fieldset>
-      <label for="date_finish">Дата окончания</label>
-      <input id="date_finish" type="date">
-    </fieldset>
-    <fieldset>
-      <label for="state">Статус</label>
-      <select id="state">
-        <option selected>Подготовка</option>
-        <option>Проходят</option>
-        <option>Завершены</option>
-      </select>
-    </fieldset>
-  </form>#}
-
-
-
