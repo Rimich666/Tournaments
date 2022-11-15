@@ -42,3 +42,7 @@ body{
 .row-grid{
   grid-template-columns: 314px 300px 148px 148px;
 }
+
+.row-grid-place{
+  grid-template-columns: 1fr;
+}

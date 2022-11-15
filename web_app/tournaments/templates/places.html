@@ -28,30 +28,17 @@
   </header>
   <section class="table">
     <h2 class="visually-hidden">Список мест проведения турниров</h2>
-    <div class="row row-grid">
-      <div class="cell cell-head"><h2>Название турнира</h2></div>
-      <div class="cell cell-head"><h2>Место проведения</h2></div>
-      <div class="cell cell-head"><h2>Время</h2></div>
-      <div class="cell cell-head"><h2>Статус</h2></div>
+    <div class="row row-grid-place">
+      <div class="cell cell-head"><h2>Название</h2></div>
     </div>
     {% for row in rows %}
-      <div class="row row-grid">
-        <div class="cell cell-row"><p class="p_left">{{ row.tournament }}</p></div>
+      <div class="row row-grid-place">
         <div class="cell cell-row"><p class="p_left">{{ row.place }}</p></div>
-        <div class="cell cell-row"><p class="p_center">{{ row.start }}<br>{{ row.finish }}</p></div>
-        <div class="cell cell-row cell-state">
-          <p class="p_left">Подгото<br>вка</p>
-          <button class="semaphore semaphore-red"></button>
-        </div>
       </div>
     {% endfor %}
-
   </section>
 {% endblock %}
 {% block script %}
-  <script>
-    const DATA_URL = '{{ url_for("tours_app.get_places") }}';
-  </script>
   <script src="../../static/js/tournaments.js"></script>
 {% endblock %}
 {% block modals %}
