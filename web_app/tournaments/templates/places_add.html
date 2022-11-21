@@ -1,0 +1,46 @@
+<div class="modal-container modal-container-close">
+  <div id="map-canvas" class="map_canvas"></div>
+  <form class="modal add_place_form" id="place_add_form">
+    <button class="button button-no modal-close-button">
+      <span class="visually-hidden">Закрыть</span>
+    </button>
+    <header class="modal-header">
+      <h2 class="modal-title">Создание нового места</h2>
+    </header>
+    <figure class="field modal-field">
+      <figcaption class="field-caption modal_field-caption">
+        Наименование
+      </figcaption>
+      <input class="field-input modal_field-input" placeholder="Введите наименование" id="place_name">
+      <label class="field-label modal_field-label" for="place_name">
+        Введите наименование<span class="red_star">*</span>
+      </label>
+    </figure>
+    <figure class="field field_address">
+      <figcaption class="field-caption modal_field-caption">
+        Адрес
+      </figcaption>
+      <textarea class="field-input area-address" placeholder="Введите адрес" rows="5" id="place_address"></textarea>
+      <label class="field-label modal_field-label" for="place_address">
+        Введите адрес
+      </label>
+    </figure>
+    <figure class="field modal-field">
+      <figcaption class="field-caption modal_field-caption">
+        Координаты
+      </figcaption>
+      <input class="field-input modal_field-input" placeholder="Координаты" id="place_location">
+      <button class="button modal_input-button" id="place_location_select">...</button>
+      <label class="field-label modal_field-label" for="place_location">
+        Координаты
+      </label>
+    </figure>
+    <div class="buttons-add_tournament">
+      <input type="submit" class="button button-yes modal_button" value="Создать" id="add_place_submit">
+      <button class="button button-no modal_button" value="Отмена">Отмена</button>
+    </div>
+    <article class="popup-map popup-close" id="">
+
+    </article>
+  </form>
+</div>

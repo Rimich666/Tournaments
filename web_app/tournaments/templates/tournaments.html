@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block left_nav %}
-  <li class="menu_item menu_item_active"><a href="#">Соревнования</a></li>
-  <li class="menu_item"><a href="#">Места проведения</a></li>
+  <li class="menu_item menu_item_active"><a href="{{ url_for('tours_app.tours') }}">Соревнования</a></li>
+  <li class="menu_item"><a href="{{ url_for('places_app.places') }}">Места проведения</a></li>
   <li class="menu_item"><a href="#">Справочники</a></li>
 {% endblock %}
 

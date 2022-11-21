@@ -14,25 +14,25 @@
 
 .rows_1{
   display: grid;
-  grid-auto-rows: 1fr;
+  grid-template-rows: 1fr;
   justify-content: center;
 }
 
 .rows_2{
   display: grid;
-  grid-auto-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-content: center;
 }
 
 .rows_4{
   display: grid;
-  grid-auto-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   justify-content: center;
 }
 
 .rows_3{
   display: grid;
-  grid-auto-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   justify-content: center;
 }
 

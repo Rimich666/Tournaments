@@ -1,0 +1,56 @@
+{% extends 'tours_base.html' %}
+
+{% block title %}
+  Новое место
+{% endblock %}
+{% block link %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tourn_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/place.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='js/leaflet/leaflet.css') }}">
+{% endblock %}
+
+{% block left_nav %}
+  <li class="menu_item"><a href="{{ url_for('tours_app.tours') }}">Соревнования</a></li>
+  <li class="menu_item"><a href="{{ url_for('places_app.places') }}">Места проведения</a></li>
+  <li class="menu_item"><a href="#">Справочники</a></li>
+{% endblock %}
+
+{% block right_nav %}
+  {% if auth %}
+    {% include 'auth_right_nav.html' %}
+  {% else %}
+    {% include 'annonym_right_nav.html' %}
+  {% endif %}
+{% endblock %}
+{% block main %}
+  <div class="place-container">
+    <div class="place-row place-row_1">
+      <section class="place-fields"></section>
+      <section class="place-photos place-photos-empty">
+        <menu class="photo-menu photo-menu-hide" id="menu_photo">
+          <li class="photo-button photo-button__add" id="add_photo"></li>
+          <li class="photo-button photo-button__delete" id="remove_photo"></li>
+        </menu>
+        <menu class="photo-menu photo-menu__leaf photo-menu__left photo-menu-hide">
+          <li class="photo-button photo-button__leaf photo-button__left" id="prev_photo"></li>
+        </menu>
+        <menu class="photo-menu photo-menu__leaf photo-menu__right photo-menu-hide">
+          <li class="photo-button photo-button__leaf photo-button__right" id="next_photo"></li>
+        </menu>
+        <div class="photo-track" id="photo_track">
+          <div class="photos-inner" id="photo_inner">
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="place-row place-map" id="map-canvas">
+    </section>
+  </div>
+{% endblock %}
+{% block script %}
+  <script src="{{ url_for('static', filename='js/leaflet/leaflet.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/place.mjs') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/edit_place.mjs') }}"></script>
+{% endblock %}
+{% block modals %}
+{% endblock %}

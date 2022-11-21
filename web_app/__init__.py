@@ -45,3 +45,4 @@ def register_blueprints(app):
     app.register_blueprint(login_app)
     app.register_blueprint(start_app)
     app.register_blueprint(tours_app)
+    app.register_blueprint(places_app)

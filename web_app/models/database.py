@@ -3,6 +3,7 @@ from sqlalchemy import (
     Integer,
     String,
     Date,
+    Float,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship
@@ -16,7 +17,19 @@ class Place(db.Model, Templ):
     __tablename__ = 'places'
     __table_args__ = {'info': {'alt_name': 'Места проведения'}}
     id = Column(Integer, primary_key=True)
-    place = Column(String, unique=True, nullable=False)
+    place = Column(String(100), unique=True, nullable=False)
+    lat = Column(Float)
+    lng = Column(Float)
+    address = Column(String(150))
+    photos = relationship('PlacePhotos')
+
+
+class PlacePhotos(db.Model, Templ):
+    __tablename__ = 'place_photos'
+    __table_args__ = {'info': {'alt_name': 'Фотографии'}}
+    id = Column(Integer, primary_key=True)
+    url = Column(String, nullable=False)
+    place_id = Column(Integer, ForeignKey(Place.id))
 
 
 class Tournament(db.Model, Templ):

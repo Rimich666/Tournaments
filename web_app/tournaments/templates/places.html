@@ -23,24 +23,30 @@
 {% block main %}
   <header class="main-header">
     <h1>Места проведения</h1>
-    <button class="button button-yes button-add" id="add_tour_button">+
-    </button>
+    <a href="{{ url_for('places_app.new') }}">
+      <button class="button button-yes button-add" id="add_place_button">+</button>
+    </a>
   </header>
   <section class="table">
     <h2 class="visually-hidden">Список мест проведения турниров</h2>
     <div class="row row-grid-place">
       <div class="cell cell-head"><h2>Название</h2></div>
+      <div class="cell cell-head"><h2>Адрес</h2></div>
+      <div class="cell cell-head"><h2>Координаты</h2></div>
+      <div class="cell cell-head"><h2>Галерея</h2></div>
     </div>
     {% for row in rows %}
       <div class="row row-grid-place">
         <div class="cell cell-row"><p class="p_left">{{ row.place }}</p></div>
+        <div class="cell cell-row"><p class="p_left">{{ row.adderess }}</p></div>
+        <div class="cell cell-row"><p class="p_left">{{ row.location.lat }}<br>{{ row.location.lng }}</p></div>
       </div>
     {% endfor %}
   </section>
-{% endblock %}
-{% block script %}
-  <script src="../../static/js/tournaments.js"></script>
+
 {% endblock %}
 {% block modals %}
-  {% include 'tours_add.html' %}
+{% endblock %}
+{% block script %}
+  <script src="../../static/js/places.js"></script>
 {% endblock %}
