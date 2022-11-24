@@ -4,11 +4,13 @@ const photoTrack = document.querySelector('#photo_track');
 const photoInner = document.querySelector('#photo_inner');
 const trackRect = photoTrack.getClientRects()[0];
 const widthPhotoContainer = Math.round(trackRect.width);
-const heightPhoto = Math.round(trackRect.height);
 const menuPrev = document.querySelector('.photo-menu__left');
 const menuNext = document.querySelector('.photo-menu__right');
 const placePhotos = document.querySelector('.place-photos');
+const mapCanvas = document.querySelector('#map-canvas');
 const MARGIN_PHOTO = 2;
+const PREFIX = 'uktus';
+const PREFIX_ID = 'place_photo_';
 
 const scrollPoints = {
   margin: 0,
@@ -19,7 +21,6 @@ const scrollPoints = {
   append: function(width, id){
     this.x += this.margin;
     const addPoint = (w)=>{
-      console.log(w);
       this.points.push({
         x: this.x,
         width: width,
@@ -42,6 +43,15 @@ const scrollPoints = {
     };
     addPoint(width);
     this.x += this.margin;
+  },
+  insert: function(width, id){
+    this.x = this.points[this.currentPoint].x;
+    const id_before = this.points[this.currentPoint].id;
+    const highArr = this.points.splice(this.points.findIndex(elem=>elem.id === id_before));
+    this.append(width, id);
+    const index = this.points.length;
+    this.points = this.points.concat(highArr);
+    this._recalc(index + 1, width + 2 * MARGIN_PHOTO);
   },
   prev: function(){
     if (this.currentPoint > 0){
@@ -75,17 +85,20 @@ const scrollPoints = {
     const last = this.points[this.points.length - 1];
     return last.width + last.x;
   },
-  delete: function(){
-    const id = this.points[this.currentPoint].id;
-    const index = this.points.findIndex(elem=>elem.id === id);
-    const deductible = this.points[index].width + 2 * MARGIN_PHOTO;
-    this.points = this.points.filter(elem=>elem.id !== id).map((elem, ind)=>{
+  _recalc: function (index, deductible){
+    this.points = this.points.map((elem, ind)=>{
       if(ind < index){
         return elem;
       }
-      elem.x -= deductible;
+      elem.x += deductible;
       return elem;
     });
+  },
+  delete: function(){
+    const id = this.points[this.currentPoint].id;
+    const index = this.points.findIndex(elem=>elem.id === id);
+    this.points = this.points.filter(elem=>elem.id !== id);
+    this._recalc(index,-this.points[index].width + 2 * MARGIN_PHOTO)
   },
   onFirst: ()=>{},
   onLast: ()=>{},
@@ -117,25 +130,29 @@ const images = {
   uktus4: {height: 400, width: 1590},
 }
 
-const addImage = (src, id)=>{
+const addImage = (img, id, widthPhoto)=>{
   const div = document.createElement('div');
-  const img = document.createElement('img');
-  img.src = src;
   div.classList.add('photo');
-  const imgName = `uktus${id}`;
-  const widthPhoto = Math.round(heightPhoto / images[imgName].height * images[imgName].width);
   div.style.width = `${widthPhoto}px`;
-  div.id = `place_photo_${id}`;
+  div.id = id;
   div.append(img);
-  console.log(`height: ${img.naturalHeight}, width: ${img.naturalWidth}`)
-  photoInner.append(div);
-  scrollPoints.append(widthPhoto, div.id);
+  return div;
+}
+
+const getWidthPhoto = (height, width)=>{
+  const heightPhoto = Math.round(trackRect.height);
+  return Math.round(heightPhoto / height * width);
 }
 
 const renderPhotos = ()=>{
   for(let i = 1; i < 7; i++){
-    const imgName = `uktus${i}`;
-    addImage(`../../static/src/${imgName}.jpg`, i);
+    const imgName = `${PREFIX}${i}`;
+    const widthPhoto = getWidthPhoto(images[imgName].height, images[imgName].width);
+    const img = document.createElement('img');
+    img.src = `../../static/src/${imgName}.jpg`;
+    const id = `${PREFIX_ID}${i}`
+    photoInner.append(addImage(img, id, widthPhoto));
+    scrollPoints.append(widthPhoto, id);
   }
   placePhotos.classList.remove('place-photos-empty')
   if (scrollPoints.width() > widthPhotoContainer){
@@ -155,4 +172,38 @@ buttonPrevPhoto.addEventListener('click', ()=>{
   photoTrack.scroll(scrollPoints.prev(), 0)
 })
 
-export {scrollPoints};
+const MAP_ZOOM = 13;
+const MAIN_PIN_SIZE = 52;
+const COORDINATES_PRECISION = 5;
+const MAP_CENTER = [56.79160,  60.63525];
+const MAIN_PIN_ICON = {
+  iconUrl: '../../static/img/main-pin.svg',
+  iconSize: [MAIN_PIN_SIZE, MAIN_PIN_SIZE],
+  iconAnchor: [MAIN_PIN_SIZE / 2, MAIN_PIN_SIZE],
+};
+
+const map = L.map('map-canvas',{
+  center: MAP_CENTER,
+  zoom: MAP_ZOOM
+})
+//let currentMarker = null;
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+
+export {
+  scrollPoints,
+  images,
+  addImage,
+  PREFIX,
+  PREFIX_ID,
+  getWidthPhoto,
+  MAP_CENTER,
+  MAIN_PIN_ICON,
+  COORDINATES_PRECISION,
+  map
+};

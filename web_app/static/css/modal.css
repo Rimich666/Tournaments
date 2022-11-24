@@ -50,17 +50,6 @@
   height: 83px;
 }
 
-.field_address{
-  grid-template-rows: 33px 102px;
-  padding: 26px 0 0;
-  width: 411px;
-  height: 135px;
-}
-
-.area-address{
-  font-size: 18px;
-}
-
 .modal_field_12{
   width: 200px;
 }
@@ -130,17 +119,6 @@
   background-color: white;
 }
 
-.add_place_form{
-  width: 537px;
-  height: 534px;
-  grid-template-rows:
-          52px
-          calc(83px + 26px)
-          calc(83px + 26px + 52px)
-          calc(83px + 26px)
-          calc(52px + 26px);
-}
-
 .add_tour_form{
   width: 537px;
   height: 482px;
@@ -194,29 +172,3 @@
   height: 400px;
   width: 600px;
 }
-
-/*.popup_row-button{
-  width: 44px;
-  height: 44px;
-  font-size: 36px;
-}
-
-.popup_close-button{
-  background-image: url("../img/Cross.svg");
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-}*/
-
-/*
-.popup_select_places-header{
-  grid-template-columns: calc(411px - (4 * 3px) - 88px) 44px 44px;
-}
-
-.popup_header{
-  font-size: 24px;
-  line-height: 50px;
-  margin-left: 24px;
-  -webkit-text-stroke-width: 1px;
-  vertical-align: bottom;
-}*/

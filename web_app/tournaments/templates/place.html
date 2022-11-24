@@ -5,8 +5,8 @@
 {% endblock %}
 {% block link %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/tourn_style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/place.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='js/leaflet/leaflet.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/place.css') }}">
 {% endblock %}
 
 {% block left_nav %}
@@ -25,7 +25,11 @@
 {% block main %}
   <div class="place-container">
     <div class="place-row place-row_1">
-      <section class="place-fields"></section>
+      <section class="place-fields">
+      {% if new %}
+        {% include 'places_add.html' %}
+      {% endif %}
+      </section>
       <section class="place-photos place-photos-empty">
         <menu class="photo-menu photo-menu-hide" id="menu_photo">
           <li class="photo-button photo-button__add" id="add_photo"></li>
@@ -44,16 +48,21 @@
       </section>
     </div>
     <section class="place-row place-map" id="map-canvas">
+
     </section>
-    <form enctype="multipart/form-data">
-      <input type="file">
-    </form>
+    {% if new or edit %}
+      <form enctype="multipart/form-data" style="display: none">
+        <input type="file" id="input_file">
+      </form>
+    {% endif %}
   </div>
 {% endblock %}
 {% block script %}
   <script src="{{ url_for('static', filename='js/leaflet/leaflet.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/place.mjs') }}"></script>
-  <script type="module" src="{{ url_for('static', filename='js/edit_place.mjs') }}"></script>
+  {% if new or edit %}
+    <script type="module" src="{{ url_for('static', filename='js/edit_place.mjs') }}"></script>
+  {% endif %}
 {% endblock %}
 {% block modals %}
 {% endblock %}

@@ -1,7 +1,8 @@
 from flask import (
     render_template,
     redirect,
-    url_for
+    url_for,
+    request
 )
 from web_app.models import Place
 from ..globals import db
@@ -34,5 +35,11 @@ def places():
 
 @places_app.route('/new', endpoint='new')
 def place():
+    return render_template('place.html', new=True)
 
-    return render_template('place.html')
+
+@places_app.route('/add', endpoint='add', methods=['POST'])
+def add_place():
+    if request.method == 'POST':
+        print('add place post')
+    return 'add place'
