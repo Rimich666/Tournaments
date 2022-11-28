@@ -2,6 +2,7 @@ import inspect
 import pkgutil
 import sys
 from pathlib import Path
+from config import Config
 
 from app import app
 from datetime import datetime
@@ -33,12 +34,15 @@ from datetime import datetime
 
 
 if __name__ == '__main__':
-    from web_app.functions.debug_info import debug_info
-
-
-    def grr(arg):
-        debug_info(arg)
-
-
-    grr("debug info")
-    pass
+    # from web_app.functions.debug_info import debug_info
+    #
+    #
+    # def grr(arg):
+    #     debug_info(arg)
+    #
+    #
+    # grr("debug info")
+    # pass
+    dir_name = Config.SOURCE_PATH.joinpath('places_photo')
+    print(dir_name.exists())
+    print(Config.SOURCE_PATH.exists())

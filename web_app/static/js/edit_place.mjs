@@ -1,27 +1,46 @@
-import './place.mjs';
 import {
   scrollPoints,
-  images,
   addImage,
-  PREFIX,
-  PREFIX_ID,
   getWidthPhoto,
-  MAP_CENTER,
-  MAIN_PIN_ICON,
-  COORDINATES_PRECISION,
-  map
 } from './place.mjs'
-console.log('edit place');
+import {submitForm} from "./fetcher.mjs";
+import {COORDINATES_PRECISION, mainMarker, MAP_CENTER} from "./map.mjs";
+
 const buttonAddPhoto = document.querySelector('#add_photo');
 const buttonRemovePhoto = document.querySelector('#remove_photo');
 const menuPhoto = document.querySelector('#menu_photo');
 const photoInner = document.querySelector('#photo_inner');
+const photoTrack = document.querySelector('#photo_track');
 const inputFile = document.querySelector('#input_file');
 const inputLocation = document.querySelector('#place_location');
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'svg', 'ico', 'bmp', 'gif'];
+const form = document.querySelector('#place_add_form')
+const PREFIX_NEW_ID = 'new_place_photo_';
+const placePhotos = document.querySelector('.place-photos');
 
+const images = {
+  id: 0,
+  getID: function(){
+    this.id ++;
+    return this.id;
+  },
+  added:[],
+  attributes: {},
+  deleted: [],
+  appendAdded: function (id, attr, file){
+    console.log(file);
+    this.added.push({
+      id: id,
+      file: file
+    });
+    this.attributes[id] = attr;
+  }
+}
 
-console.log(scrollPoints);
+let placeLocation = {
+  lat: MAP_CENTER[0],
+  lng: MAP_CENTER[1]
+}
 
 menuPhoto.classList.remove('photo-menu-hide');
 buttonAddPhoto.addEventListener('click', ()=>{
@@ -32,23 +51,44 @@ buttonRemovePhoto.addEventListener('click', ()=>{
   const deletePhoto = document.querySelector(`#${scrollPoints.points[scrollPoints.currentPoint].id}`);
   deletePhoto.remove();
   scrollPoints.delete();
-  console.log(scrollPoints.points[scrollPoints.currentPoint].id);
 });
 
-const onLoadPhoto = (evt)=>{
+const insertPhoto = (img, width, id)=>{
   const beforePhoto = document.querySelector(`#${scrollPoints.points[scrollPoints.currentPoint].id}`);
-  const heightPhoto = evt.target.naturalHeight;
-  const widthPhoto = evt.target.naturalWidth;
-  const id = `${PREFIX_ID}${Object.keys(images).length + 1}`;
-  const width = getWidthPhoto(heightPhoto, widthPhoto);
   photoInner.insertBefore(addImage(
-    evt.target, id, width
+    img, id, width
     ), beforePhoto
   );
-  scrollPoints.insert(getWidthPhoto(heightPhoto, widthPhoto), id);
+  photoTrack.scroll(scrollPoints.insert(width, id), 0);
+}
+
+const appendPhoto = (img, width, id)=>{
+  photoInner.append(addImage(img, id, width));
+  scrollPoints.append(width, id);
+}
+
+const onLoadPhoto = (evt)=>{
+  const img = evt.target;
+  const heightPhoto = img.naturalHeight;
+  const widthPhoto = img.naturalWidth;
+  const width = getWidthPhoto(heightPhoto, widthPhoto);
+  const id = images.getID();
+  const idDOM = `${PREFIX_NEW_ID}${id}`;
+  images.appendAdded(id, {
+    height: heightPhoto,
+    width: widthPhoto,}, inputFile.files[0]);
+  inputFile.disabled = false;
+  if (scrollPoints.currentPoint < 0){
+    appendPhoto(img, width, idDOM);
+    placePhotos.classList.remove('place-photos-empty');
+  }
+  else{
+    insertPhoto(img, width, idDOM);
+  }
 }
 
 const addPhoto = ()=>{
+  inputFile.disabled = true;
   const file = inputFile.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
@@ -59,27 +99,39 @@ const addPhoto = ()=>{
   const img = document.createElement('img');
   img.src = URL.createObjectURL(file);
   img.addEventListener('load', onLoadPhoto);
-
-  console.log(`add photo ${inputFile.files.length}`);
 }
 inputFile.addEventListener('change', addPhoto, false);
 
 const fillAddress = (location)=>{
-  inputLocation.value = `${location.lat.toFixed(COORDINATES_PRECISION)},
-  ${location.lng.toFixed(COORDINATES_PRECISION)}`;
+  inputLocation.value = `широта: ${location.lat.toFixed(COORDINATES_PRECISION)},
+  долгота: ${location.lng.toFixed(COORDINATES_PRECISION)}`;
 };
 
-const mainMarker = L.marker(
-  MAP_CENTER,
-  {
-    draggable: true,
-    icon: L.icon(MAIN_PIN_ICON)
-  }
-);
-
-mainMarker.addTo(map);
-
-mainMarker.on('move', (evt) => {
+mainMarker.on('move', (evt)=>{
   fillAddress(evt.target.getLatLng());
 });
 
+mainMarker.on('dragend', (evt)=>{
+  placeLocation = evt.target.getLatLng();
+})
+
+const onSuccess = (response)=>{
+  return response.json()
+  .then(console.log);
+}
+
+const onError = (msg)=>{
+  console.log(...msg.headers);
+  return msg.text()
+  .then(console.log);
+}
+
+form.addEventListener('submit', (evt)=>{
+  evt.preventDefault();
+  const url = form.action;
+  const formData = new FormData(form);
+  images.added.forEach((elem)=>formData.append(elem.id,elem.file));
+  formData.append('attributes', JSON.stringify(images.attributes));
+  formData.set('location', JSON.stringify(placeLocation));
+  submitForm(url, formData, onSuccess, onError);
+});

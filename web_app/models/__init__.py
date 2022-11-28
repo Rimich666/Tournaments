@@ -6,7 +6,7 @@ from .user import (
 from .database import (
     Place,
     Tournament,
-
+    PlacePhotos
 )
 
 # models = {

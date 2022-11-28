@@ -1,4 +1,4 @@
-<form class="add_place_form" id="place_add_form" action="{{ url_for('places_app.add') }}" method="post">
+<form class="add_place_form" id="place_add_form" action="{{ url_for('places_app.add') }}" method="post" enctype="multipart/form-data">
   <header class="place-header">
     <h2 class="place-title">Создание нового места</h2>
   </header>
@@ -6,7 +6,7 @@
     <figcaption class="field-caption place_field-caption">
       Наименование
     </figcaption>
-    <input class="field-input place_field-input" placeholder="Введите наименование" id="place_name">
+    <input class="field-input place_field-input" placeholder="Введите наименование" id="place_name" name="name">
     <label class="field-label place_field-label" for="place_name">
       Введите наименование<span class="red_star">*</span>
     </label>
@@ -15,7 +15,7 @@
     <figcaption class="field-caption place_field-caption">
       Адрес
     </figcaption>
-    <textarea class="field-input place_field-input area-address" placeholder="Введите адрес" rows="5" id="place_address"></textarea>
+    <textarea class="field-input place_field-input area-address" placeholder="Введите адрес" rows="5" id="place_address" name="address"></textarea>
     <label class="field-label place_field-label" for="place_address">
       Введите адрес
     </label>
@@ -24,13 +24,13 @@
     <figcaption class="field-caption place_field-caption">
       Координаты
     </figcaption>
-    <input class="field-input place_field-input" placeholder="Координаты" id="place_location">
+    <input class="field-input place_field-input" placeholder="Координаты" id="place_location" name="location">
     <label class="field-label place_field-label" for="place_location">
       Координаты
     </label>
   </figure>
   <div class="buttons-add_place">
-    <input type="submit" class="button button-yes place_button" value="Записать" id="add_place_submit">
+    <input type="submit" class="button button-yes place_button" value="Записать" id="add_place_submit" name="button">
     <button class="button button-no place_button" value="Отмена">Отмена</button>
   </div>
 </form>

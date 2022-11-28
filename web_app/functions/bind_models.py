@@ -27,7 +27,7 @@ def find_models(app_name):
 def find_models_pkg(module_name, models_pkg):
     filename = sys.modules[module_name].__file__
     package_path = Path(filename).resolve().parent
-    for sub_module in pkgutil.walk_packages([package_path]):
+    for sub_module in pkgutil.walk_packages([str(package_path)]):
         _, sub_module_name, pkg = sub_module
         qname = f"{module_name}.{sub_module_name}"
         if pkg and qname in sys.modules.keys():
@@ -38,7 +38,7 @@ def find_models_pkg(module_name, models_pkg):
             models_pkg.name = qname
             models_pkg.path = package_path
             models_pkg.find = True
-            for module in pkgutil.walk_packages([package_path]):
+            for module in pkgutil.walk_packages([str(package_path)]):
                 info, sub_module_name, pkg = module
                 if not pkg:
                     models_pkg.list.append(sub_module_name)

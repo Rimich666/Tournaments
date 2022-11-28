@@ -1,3 +1,4 @@
+import './map.mjs';
 const buttonPrevPhoto = document.querySelector('#prev_photo');
 const buttonNextPhoto = document.querySelector('#next_photo');
 const photoTrack = document.querySelector('#photo_track');
@@ -16,8 +17,30 @@ const scrollPoints = {
   margin: 0,
   x: 0,
   points: [],
-  currentPoint: 0,
+  currentPoint: -1,
   containerWidth: 0,
+  scroll: false,
+  first: true,
+  last: true,
+  width: 0,
+  _setScroll: function(deductible){
+    this.width += deductible;
+    this.scroll = this.width > this.containerWidth;
+    this.setCurrent(this.currentPoint);
+    /*if (!this.scroll){
+      this.onFirst();
+      this.onLast();
+      return;
+    }
+    if (this.currentPoint > 0 && this.first){
+      this.first = false;
+      this.onSecond();
+    }
+    if ((this.width - this.points[this.currentPoint].x) > this.containerWidth && this.last){
+      this.last = false;
+      this.onNextToLast();
+    }*/
+  },
   append: function(width, id){
     this.x += this.margin;
     const addPoint = (w)=>{
@@ -42,49 +65,60 @@ const scrollPoints = {
       }
     };
     addPoint(width);
-    this.x += this.margin;
+    if (this.currentPoint < 0){
+      this.currentPoint = 0;
+    }
+    this._setScroll(width + 2 * this.margin);
   },
   insert: function(width, id){
-    this.x = this.points[this.currentPoint].x;
     const id_before = this.points[this.currentPoint].id;
-    const highArr = this.points.splice(this.points.findIndex(elem=>elem.id === id_before));
+    this.setCurrent(this.points.findIndex(elem=>elem.id === id_before));
+    this.x = this.points[this.currentPoint].x - this.margin;
+    const highArr = this.points.splice(this.currentPoint);
     this.append(width, id);
     const index = this.points.length;
     this.points = this.points.concat(highArr);
-    this._recalc(index + 1, width + 2 * MARGIN_PHOTO);
+    this._recalc(index, width + 2 * MARGIN_PHOTO);
+    return this.points[this.currentPoint].x;
   },
   prev: function(){
     if (this.currentPoint > 0){
-      if (this.currentPoint === (this.points.length - 1)){
-        this.onNextToLast();
-      }
-
       this.setCurrent(this.currentPoint - 1);
     }
     return this.points[this.currentPoint].x;
   },
   next: function(){
     if (this.currentPoint < (this.points.length - 1)){
-      if (this.currentPoint === 0){
-        this.onSecond();
-      }
       this.setCurrent(this.currentPoint + 1);
+
     }
     return this.points[this.currentPoint].x;
   },
   setCurrent: function (index){
+    if (index < 0 || index >= this.points.length){
+      return;
+    }
     this.currentPoint = index;
-    if (this.currentPoint === 0){
+    console.log(`currentPoint: ${this.currentPoint}`);
+    if (this.currentPoint > 0 && this.scroll && this.first){
+      this.first = false;
+      this.onSecond();
+    }
+    if (this.currentPoint === 0 && !this.first){
+      this.first = true;
       this.onFirst();
     }
-    if (this.currentPoint === (this.points.length - 1)){
+
+    if ((this.width - this.points[this.currentPoint].x) > this.containerWidth && this.last){
+      this.last = false;
+      this.onNextToLast();
+    }
+    if ((this.width - this.points[this.currentPoint].x) <= this.containerWidth && !this.last){
+      this.last = true;
       this.onLast();
     }
   },
-  width: function(){
-    const last = this.points[this.points.length - 1];
-    return last.width + last.x;
-  },
+
   _recalc: function (index, deductible){
     this.points = this.points.map((elem, ind)=>{
       if(ind < index){
@@ -97,8 +131,10 @@ const scrollPoints = {
   delete: function(){
     const id = this.points[this.currentPoint].id;
     const index = this.points.findIndex(elem=>elem.id === id);
+    const deductible = -(this.points[index].width + 2 * this.margin);
     this.points = this.points.filter(elem=>elem.id !== id);
-    this._recalc(index,-this.points[index].width + 2 * MARGIN_PHOTO)
+    this._recalc(index, deductible);
+    this._setScroll(deductible);
   },
   onFirst: ()=>{},
   onLast: ()=>{},
@@ -109,9 +145,11 @@ const scrollPoints = {
 scrollPoints.margin = MARGIN_PHOTO;
 scrollPoints.containerWidth = widthPhotoContainer;
 scrollPoints.onFirst = ()=>{
+  console.log('on first');
   menuPrev.classList.add('photo-menu-hide');
 }
 scrollPoints.onLast = ()=>{
+  console.log('on last');
   menuNext.classList.add('photo-menu-hide');
 }
 scrollPoints.onSecond = ()=>{
@@ -119,15 +157,6 @@ scrollPoints.onSecond = ()=>{
 }
 scrollPoints.onNextToLast = ()=>{
   menuNext.classList.remove('photo-menu-hide');
-}
-
-const images = {
-  uktus1: {height: 960, width: 1280},
-  uktus2: {height: 590, width: 839},
-  uktus3: {height: 545, width: 1000},
-  uktus5: {height: 637, width: 1000},
-  uktus6: {height: 1440, width: 1920},
-  uktus4: {height: 400, width: 1590},
 }
 
 const addImage = (img, id, widthPhoto)=>{
@@ -154,7 +183,7 @@ const renderPhotos = ()=>{
     photoInner.append(addImage(img, id, widthPhoto));
     scrollPoints.append(widthPhoto, id);
   }
-  placePhotos.classList.remove('place-photos-empty')
+  placePhotos.classList.remove('place-photos-empty');
   if (scrollPoints.width() > widthPhotoContainer){
     menuNext.classList.remove('photo-menu-hide');
     menuPrev.classList.remove('photo-menu-hide');
@@ -162,7 +191,7 @@ const renderPhotos = ()=>{
   scrollPoints.setCurrent(0);
 }
 
-renderPhotos();
+//renderPhotos();
 
 buttonNextPhoto.addEventListener('click', ()=>{
   photoTrack.scroll(scrollPoints.next(), 0)
@@ -172,38 +201,8 @@ buttonPrevPhoto.addEventListener('click', ()=>{
   photoTrack.scroll(scrollPoints.prev(), 0)
 })
 
-const MAP_ZOOM = 13;
-const MAIN_PIN_SIZE = 52;
-const COORDINATES_PRECISION = 5;
-const MAP_CENTER = [56.79160,  60.63525];
-const MAIN_PIN_ICON = {
-  iconUrl: '../../static/img/main-pin.svg',
-  iconSize: [MAIN_PIN_SIZE, MAIN_PIN_SIZE],
-  iconAnchor: [MAIN_PIN_SIZE / 2, MAIN_PIN_SIZE],
-};
-
-const map = L.map('map-canvas',{
-  center: MAP_CENTER,
-  zoom: MAP_ZOOM
-})
-//let currentMarker = null;
-
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
-
 export {
   scrollPoints,
-  images,
   addImage,
-  PREFIX,
-  PREFIX_ID,
   getWidthPhoto,
-  MAP_CENTER,
-  MAIN_PIN_ICON,
-  COORDINATES_PRECISION,
-  map
 };

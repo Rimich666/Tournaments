@@ -23,13 +23,37 @@ class Place(db.Model, Templ):
     address = Column(String(150))
     photos = relationship('PlacePhotos')
 
+    def __init__(self, place, loc, addr):
+        self.place = place
+        self.lat = loc['lat']
+        self.lng = loc['lng']
+        self.address = addr
+
+    def __str__(self):
+        return f'id: {self.id}, name: {self.place}, lat: {self.lat}, lng: {self.lng}'
+
 
 class PlacePhotos(db.Model, Templ):
     __tablename__ = 'place_photos'
     __table_args__ = {'info': {'alt_name': 'Фотографии'}}
     id = Column(Integer, primary_key=True)
-    url = Column(String, nullable=False)
+    ext = Column(String(5), nullable=False)
+    width = Column(Integer, nullable=False)
+    height = Column(Integer, nullable=False)
     place_id = Column(Integer, ForeignKey(Place.id))
+    place = relationship(Place, back_populates="photos")
+
+    def __init__(self, id_place, ext, size):
+        self.ext = ext
+        self.place_id = id_place
+        self.width = size['width']
+        self.height = size['height']
+
+    def __str__(self):
+        repr_place = self.place_id
+        if self.place:
+            repr_place = self.place.place
+        return f'id:{self.id}, ext: .{self.ext}, place: {repr_place}'
 
 
 class Tournament(db.Model, Templ):

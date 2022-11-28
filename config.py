@@ -1,5 +1,5 @@
 from os import getenv
-
+from pathlib import Path
 from flask import url_for
 
 SQLALCHEMY_DATABASE_URI = getenv("SQLALCHEMY_DATABASE_URI", "postgresql://user:password@localhost:5454/tournament")
@@ -20,6 +20,12 @@ class Config:
     DEF_PASSWORD = '1'
     SMS_TIMEOUT = 300
     MAIN_PAGE = 'start_app.start'
+
+    ROOT_PATH = Path(__file__).resolve().parent
+    STATIC_PATH = ROOT_PATH.joinpath('web_app', 'static')
+    SOURCE_PATH = STATIC_PATH.joinpath('src')
+
+    IMAGES_EXTENSIONS = {'jpg', 'jpeg', 'png', 'svg', 'ico', 'bmp', 'gif'}
 
 
 class ProductionConfig(Config):
