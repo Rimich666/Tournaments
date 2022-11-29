@@ -78,18 +78,14 @@ def add_place():
             request.form.get('address')
         )
         db.session.add(new_place)
-        #raise InternalServerError(f'не удалось добавить place "{request.form.get("name")}"')
-        res = make_response(f'не удалось добавить place "{request.form.get("name")}"', 800)
-        return res
-
         try:
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
-            #raise InternalServerError(f'не удалось добавить place "{request.form.get("name")}"')
-            return(json.dumps({
-                'res': f'не удалось добавить place "{request.form.get("name")}"'
-            }))
+            return make_response(json.dumps({
+                'status': 633,
+                'statusText': f'не удалось добавить place "{request.form.get("name")}"'
+            }), 633)
         if len(request.files) == 0:
             return json.dumps({
                 'res': 'place добавлен, с фотографиями было б веселее, не находите? '

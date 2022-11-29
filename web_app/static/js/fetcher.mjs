@@ -6,16 +6,22 @@ const submitForm = (url, formData, onSuccess, onError)=>{
       'Content-Type': 'multipart/form-data',
     }*/
   })
-    .then((response)=>{
+    .then((response)=> {
       if (response.ok) {
         return response;
       }
-      throw response
-      /*throw `status: ${response.status},
-        statusText: ${response.statusText}`;*/
+      //throw response
+      if (response.status === 633){
+        throw response.json()
+      }
+      throw JSON.stringify({
+        status: response.status,
+        statusText: response.statusText
+      });
     })
-    .then(onSuccess)
-    .catch(onError);
-};
+      .then(onSuccess)
+      .catch(onError);
+}
+
 
 export {submitForm};

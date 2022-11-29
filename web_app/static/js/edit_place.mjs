@@ -121,9 +121,8 @@ const onSuccess = (response)=>{
 }
 
 const onError = (msg)=>{
-  console.log(...msg.headers);
-  return msg.text()
-  .then(console.log);
+  return msg
+    .then (console.log);
 }
 
 form.addEventListener('submit', (evt)=>{
