@@ -1,0 +1,106 @@
+@import "root.css";
+
+root{
+  --width_nav: calc(var(--width) / 6);
+  --width_content: calc(var(--width) / 6 * 5);
+}
+
+body{
+  background: #ffffff url("../img/snow200x200.jpg");
+  width: var(--width);
+  margin: auto;
+}
+
+nav{
+  height: 500px;
+}
+
+.references-container{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.references-list{
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.reference_item{
+  width: calc(var(--width) / 6 * 0.9 - 2px);
+  padding-left: 10%;
+  height: calc(var(--width) / (6 * 4));
+  border: var(--darkly) 1px solid;
+  line-height: calc(var(--width) / (6 * 4));
+  background-color: var(--snow_80);
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  font-family: var(--button-font-family);
+  color: var(--deep-dark);
+}
+
+.last_item{
+  width: calc(var(--width) / 6);
+  height: calc(var(--width) / (6 * 4));
+}
+
+.reference_item:hover{
+  color: var(--darkly);
+  background-color: var(--light);
+}
+
+.reference_item:active{
+  font-weight: bold;
+  background-color: white;
+}
+
+.reference_item-active:hover{
+  background-color: var(--light_70);
+  color: var(--deep);
+}
+
+.reference_item-active{
+  color: var(--deep);
+  font-weight: bold;
+  background-color: var(--light_70);
+  border: var(--light_70) 1px solid;
+  border-right: none;
+  width: calc(var(--width) / 6 * 0.9 - 1px);
+  position: relative;
+  z-index: 1;
+}
+
+.item_before_active{
+  position: relative;
+  border-radius: 10px 0 10px 10px;
+}
+
+.item_after_active{
+  position: relative;
+  border-radius: 10px 10px 0 10px;
+}
+
+.references-content{
+  position: relative;
+  background-color: var(--light_70);
+  border-radius: 0 10px 10px 10px;
+}
+
+.div-after{
+  width: 10px;
+  height: 10px;
+  background-image: radial-gradient(circle at 0 100%, var(--light_0) 9px, var(--light_70) 10px);
+  position: absolute;
+  right: -1px;
+  top: -1px;
+}
+
+.div-before{
+  width: 10px;
+  height: 10px;
+  background-image: radial-gradient(circle at 0 0, var(--light_0) 9px, var(--light_70) 10px);
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+}
