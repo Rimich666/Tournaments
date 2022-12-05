@@ -9,19 +9,34 @@
   <main class="references-container">
     <nav>
       <ul class="references-list">
-        <li class="reference_item" id="reference_0">Команды</li>
-        <li class="reference_item" id="reference_1">Спортсмены</li>
-        <li class="reference_item" id="reference_2">Судьи</li>
-        <li class="reference_item" id="reference_3">Виды спорта</li>
-        <li class="reference_item" id="reference_4">Дисциплины</li>
-        <li class="reference_item" id="reference_5">Категории</li>
-        <li class="reference_item" id="reference_6">Карточки</li>
-        <li class="last_item" id="reference_7"></li>
+        {% for reference in references %}
+          <li class="reference_item" id="{{ "reference_" ~ loop.index0 }}">{{ reference }}</li>
+        {% endfor %}
+        <li class="last_item" id="{{ "reference_" ~ references|length() }}"></li>
       </ul>
     </nav>
     <section class="references-content">
+      <div class="table_reference">
+        <div class="head_reference"><h2>Заголовок таблицы</h2></div>
+        <div class="row_reference">
+          <div class="cell_reference column_head"><h2>Column1</h2></div>
+          <div class="cell_reference column_head"><h2>Column2</h2></div>
+        </div>
+        <div class="row_reference">
+          <div class="cell_reference"></div>
+          <div class="cell_reference"></div>
+        </div>
+        <div class="row_reference">
+          <div class="cell_reference"></div>
+          <div class="cell_reference"></div>
+        </div>
+        <div class="row_reference">
+          <div class="cell_reference"></div>
+          <div class="cell_reference"></div>
+        </div>
+      </div>
     </section>
   </main>
-  <script src="../../static/js/references.mjs"></script>
+  <script src="../../static/js/references.mjs" type="module"></script>
 </body>
 </html>

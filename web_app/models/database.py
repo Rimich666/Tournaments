@@ -58,7 +58,7 @@ class PlacePhotos(db.Model, Templ):
 
 class Tournament(db.Model, Templ):
     __tablename__ = 'tournaments'
-    __table_args__ = {'info': {'alt_name': 'Турнир'}}
+    __table_args__ = {'info': {'alt_name': 'Турниры'}}
     id = Column(Integer, primary_key=True)
     tournament = Column(String(100), unique=True, nullable=False)
     start = Column(Date, nullable=False)
@@ -73,30 +73,31 @@ class Tournament(db.Model, Templ):
 
 class SportType(db.Model, Templ):
     __tablename__ = 'sport_types'
-    __table_args__ = {'info': {'alt_name': 'Вид спорта'}}
+    __table_args__ = {'info': {'alt_name': 'Виды спорта'}}
     id = Column(Integer, primary_key=True)
-    type = Column(String(100), unique=True, nullable=False)
+    type = Column(String(100), unique=True, nullable=False, info={'alt_name': 'Вид спорта'})
     specialities = relationship('Speciality')
 
 
 class Speciality(db.Model, Templ):
     __tablename__ = 'speciality'
-    __table_args__ = {'info': {'alt_name': 'Дисциплина'}}
+    __table_args__ = {'info': {'alt_name': 'Дисциплины'}}
     id = Column(Integer, primary_key=True)
     spec = Column(String(100), unique=True, nullable=False)
-    type_id = Column(Integer, ForeignKey(SportType.id))
+    type_id = Column(Integer, ForeignKey(SportType.id), info={'alt_name': 'Вид спорта'})
+    type = relationship(SportType, back_populates='specialities')
 
 
 class Category(db.Model, Templ):
     __tablename__ = 'category'
-    __table_args__ = {'info': {'alt_name': 'Категория'}}
+    __table_args__ = {'info': {'alt_name': 'Категории'}}
     id = Column(Integer, primary_key=True)
     category = Column(String(100), unique=True, nullable=False)
 
 
 class Competition(db.Model, Templ):
     __tablename__ = 'competitions'
-    __table_args__ = {'info': {'alt_name': 'Соревнование'}}
+    __table_args__ = {'info': {'alt_name': 'Соревнования'}}
     id = Column(Integer, primary_key=True)
     comp = Column(String(100), unique=True, nullable=False)
     begin = Column(Date, nullable=False)
@@ -122,7 +123,7 @@ class Gate(db.Model, Templ):
 
 class Attempt(db.Model, Templ):
     __tablename__ = 'attempts'
-    __table_args__ = {'info': {'alt_name': 'Попытка'}}
+    __table_args__ = {'info': {'alt_name': 'Попытки'}}
     id = Column(Integer, primary_key=True)
     number = Column(Integer, nullable=False)
     comp_id = Column(Integer, ForeignKey(Competition.id))
@@ -168,13 +169,13 @@ class Command(Templ):
 
 class Person(db.Model, Templ):
     __tablename__ = 'persons'
-    __table_args__ = {'info': {'alt_name': 'Люди'}}
+    __table_args__ = {'info': {'alt_name': 'Персоны'}}
     id = Column(Integer, primary_key=True)
-    surname = Column(String(30), nullable=False)
-    name = Column(String(30), nullable=False)
-    patronymic = Column(String(30))
-    birthday = Column(Date, nullable=False)
-    gender = Column(String(4), nullable=False)
+    surname = Column(String(30), nullable=False, info={'alt_name': 'Фамилия'})
+    name = Column(String(30), nullable=False, info={'alt_name': 'Имя'})
+    patronymic = Column(String(30), info={'alt_name': 'Отчество'})
+    birthday = Column(Date, nullable=False, info={'alt_name': 'Дата рождения'})
+    gender = Column(String(4), nullable=False, info={'alt_name': 'Пол'})
     data = relationship('PersonalData', back_populates='person', uselist=False)
 
 
@@ -191,9 +192,10 @@ class Sportsman(db.Model, Templ):
     __tablename__ = 'sportsmen'
     __table_args__ = {'info': {'alt_name': 'Спортсмены'}}
     id = Column(Integer, primary_key=True)
-    pers_id = Column(Integer, ForeignKey(Person.id), nullable=False)
-    team_id = Column(Integer, ForeignKey(Team.id), nullable=False)
-    person = relationship('Person', uselist=False)
+    pers_id = Column(Integer, ForeignKey(Person.id), nullable=False, info={'alt_name': 'Персона'})
+    team_id = Column(Integer, ForeignKey(Team.id), nullable=False, info={'alt_name': 'Команда'})
+    person = relationship('Person', uselist=False, info={'alt_name': 'Персона'})
+    team = relationship(Team, back_populates='sportsmen', info={'alt_name': 'Команда'})
 
 
 class Card(db.Model, Templ):

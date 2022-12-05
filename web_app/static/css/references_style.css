@@ -11,10 +11,6 @@ body{
   margin: auto;
 }
 
-nav{
-  height: 500px;
-}
-
 .references-container{
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -82,9 +78,10 @@ nav{
 }
 
 .references-content{
-  position: relative;
+  display: flex;
   background-color: var(--light_70);
   border-radius: 0 10px 10px 10px;
+  padding: 30px 0;
 }
 
 .div-after{
@@ -103,4 +100,59 @@ nav{
   position: absolute;
   right: -1px;
   bottom: -1px;
+}
+
+.table_reference{
+  margin: auto;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.head_reference{
+  display: flex;
+  border-radius: 5px;
+  background: var(--deep_74);
+}
+
+.row_reference{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.cell_reference{
+  height: 40px;
+  border: var(--darkly_80) solid 1px;
+  border-radius: 5px;
+  background-color: var(--snow_30);
+  display: flex;
+}
+
+.cell_reference p{
+  margin: auto 10%;
+  font-family: var(--p-font-family);
+  color: var(--deep-dark);
+}
+
+.head_reference h2{
+  font-family: var(--header-font-family);
+  color: var(--light);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--deep);
+  margin: auto;
+  font-size: 24px;
+}
+
+.column_head{
+  background-color: var(--snow);
+  display: flex;
+}
+
+.column_head h2{
+  margin: auto;
+  font-family: var(--header-font-family);
+  font-size: 20px;
+  color: var(--deep);
+  text-align: center;
 }

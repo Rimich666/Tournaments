@@ -38,11 +38,11 @@ def register_blueprints(app):
     from web_app.admin import admin_app
     from web_app.login import login_app
     from web_app.start import start_app
-    from web_app.tournaments import tours_app
-    from web_app.tournaments import places_app
+    from web_app.tournaments import tours_app, places_app, references_app
 
     app.register_blueprint(admin_app)
     app.register_blueprint(login_app)
     app.register_blueprint(start_app)
     app.register_blueprint(tours_app)
     app.register_blueprint(places_app)
+    app.register_blueprint(references_app)

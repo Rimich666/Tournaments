@@ -10,7 +10,7 @@
 {% block left_nav %}
   <li class="menu_item"><a href="{{ url_for("tours_app.main") }}">Соревнования</a></li>
   <li class="menu_item menu_item_active"><a href="#">Места проведения</a></li>
-  <li class="menu_item"><a href="#">Справочники</a></li>
+  <li class="menu_item"><a href="{{ url_for('references_app.references') }}">Справочники</a></li>
 {% endblock %}
 
 {% block right_nav %}
